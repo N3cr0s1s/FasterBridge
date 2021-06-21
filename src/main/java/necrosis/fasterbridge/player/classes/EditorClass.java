@@ -1,0 +1,53 @@
+package necrosis.fasterbridge.player.classes;
+
+import necrosis.fasterbridge.arena.ArenaClass;
+
+public class EditorClass {
+
+    private boolean inEditor;
+    private String inArena;
+    private ArenaClass arenaClass;
+
+    public EditorClass(){
+        this.inEditor = false;
+        this.inArena = "";
+        this.arenaClass = null;
+    }
+
+    public boolean isInEditor() {
+        return inEditor;
+    }
+
+    public void setInEditor(boolean inEditor) {
+        this.inEditor = inEditor;
+    }
+
+    public String getInArena() {
+        return inArena;
+    }
+
+    public void setInArena(String inArena) {
+        this.inArena = inArena;
+    }
+
+    public ArenaClass getArenaClass() {
+        return arenaClass;
+    }
+
+    public void setArenaClass(ArenaClass arenaClass) {
+        this.arenaClass = arenaClass;
+    }
+
+    public ArenaClass setEditor(ArenaClass arenaClass) {
+        this.inEditor = true;
+        this.inArena = arenaClass.getArenaName();
+        this.arenaClass = arenaClass;
+        return arenaClass;
+    }
+
+    public void removeEditor(){
+        this.inEditor = false;
+        this.inArena = "";
+        this.arenaClass = null;
+    }
+}
