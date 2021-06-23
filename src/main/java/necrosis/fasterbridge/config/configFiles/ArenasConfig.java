@@ -3,7 +3,6 @@ package necrosis.fasterbridge.config.configFiles;
 import cornerlesscube.craftkit.utils.file.yaml.YamlClass;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.arena.ArenaClass;
-import necrosis.fasterbridge.arena.Direction;
 import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
 import necrosis.fasterbridge.exceptions.ArenaNotValidException;
 import org.bukkit.Bukkit;

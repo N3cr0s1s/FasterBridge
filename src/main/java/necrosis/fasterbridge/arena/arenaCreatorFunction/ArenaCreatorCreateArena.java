@@ -23,7 +23,9 @@ public class ArenaCreatorCreateArena {
                 deathZoneVertical,
                 direction,
                 this.plugin
-        ).register().save();
+        )
+                .register()
+                .save();
     }
 
     public ArenaClass createArena(String arenaName){

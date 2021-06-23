@@ -44,4 +44,5 @@ public final class ArenaManager {
     public ArenaPlayerClass player() {
         return playerClass;
     }
+
 }

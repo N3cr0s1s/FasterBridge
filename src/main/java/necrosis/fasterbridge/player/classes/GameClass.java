@@ -1,7 +1,9 @@
 package necrosis.fasterbridge.player.classes;
 
 import cornerlesscube.craftkit.utils.Stopwatch;
+import necrosis.fasterbridge.arena.ArenaClass;
 import org.bukkit.Location;
+import org.bukkit.inventory.ItemStack;
 
 public class GameClass {
 
@@ -10,6 +12,7 @@ public class GameClass {
     private int slot;
     private Location startLoc;
     private final Stopwatch stopwatch;
+    private ItemStack[] prevInv;
 
     public GameClass(){
         this.inGame = false;
@@ -17,6 +20,7 @@ public class GameClass {
         this.slot = 0;
         this.startLoc = null;
         this.stopwatch = new Stopwatch();
+        this.prevInv = null;
     }
 
     public boolean isInGame() {
@@ -53,5 +57,13 @@ public class GameClass {
 
     public Stopwatch getStopwatch() {
         return stopwatch;
+    }
+
+    public ItemStack[] getPrevInv() {
+        return prevInv;
+    }
+
+    public void setPrevInv(ItemStack[] prevInv) {
+        this.prevInv = prevInv;
     }
 }

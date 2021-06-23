@@ -1,7 +1,6 @@
 package necrosis.fasterbridge.arena.arenaCreatorFunction;
 
 import necrosis.fasterbridge.FasterBridge;
-import necrosis.fasterbridge.arena.arenaCreatorFunction.ArenaCreatorSetLocation;
 
 public class ArenaEditorClass {
 
@@ -10,12 +9,14 @@ public class ArenaEditorClass {
     //  CLASSES
     private final ArenaCreatorSetLocation setLocation;
     private final ArenaCreatorCreateArena createArena;
+    private final ArenaCreatorArenaValidator validateArena;
 
     public ArenaEditorClass(FasterBridge plugin){
         this.plugin = plugin;
 
-        this.setLocation = new ArenaCreatorSetLocation(plugin);
-        this.createArena = new ArenaCreatorCreateArena(plugin);
+        this.setLocation    =       new ArenaCreatorSetLocation(plugin);
+        this.createArena    =       new ArenaCreatorCreateArena(plugin);
+        this.validateArena  =       new ArenaCreatorArenaValidator(plugin);
     }
 
     public ArenaCreatorSetLocation location() {
@@ -24,5 +25,9 @@ public class ArenaEditorClass {
 
     public ArenaCreatorCreateArena getCreateArena() {
         return createArena;
+    }
+
+    public ArenaCreatorArenaValidator getValidator() {
+        return validateArena;
     }
 }

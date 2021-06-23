@@ -2,8 +2,10 @@ package necrosis.fasterbridge.arena;
 
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
+import necrosis.fasterbridge.exceptions.FullSlotException;
 import necrosis.fasterbridge.exceptions.MaxSlotException;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 public class ArenaClass {
 
@@ -15,6 +17,7 @@ public class ArenaClass {
     private int deathZoneVertical;
     private int deathZoneHorizontal;
     private Direction direction;
+    private boolean[] slots;
 
     public ArenaClass(String arenaName,int maxPlayer,Location[] locations,FasterBridge plugin){
         this.plugin = plugin;
@@ -25,6 +28,7 @@ public class ArenaClass {
         this.deathZoneHorizontal = 10;
         this.deathZoneHorizontal = 5;
         this.direction = Direction.NORTH;
+        this.slots = new boolean[maxPlayer];
     }
 
     public ArenaClass(String arenaName,int maxPlayer,FasterBridge plugin){
@@ -36,6 +40,7 @@ public class ArenaClass {
         this.deathZoneHorizontal = 10;
         this.deathZoneHorizontal = 5;
         this.direction = Direction.NORTH;
+        this.slots = new boolean[maxPlayer];
     }
 
     public ArenaClass(String arenaName,int maxPlayer,boolean isActive,Location[] locations,int deathZoneHorizontal,int deathZoneVertical,Direction direction,FasterBridge plugin){
@@ -47,6 +52,7 @@ public class ArenaClass {
         this.deathZoneHorizontal = deathZoneHorizontal;
         this.deathZoneHorizontal = deathZoneVertical;
         this.direction = direction;
+        this.slots = new boolean[maxPlayer];
     }
 
     public String getArenaName() {
@@ -125,7 +131,48 @@ public class ArenaClass {
         return direction;
     }
 
-    public void setDirection(Direction direction) {
+    public ArenaClass setDirection(Direction direction) {
         this.direction = direction;
+        return this;
+    }
+
+    public ArenaClass setDirection(float yaw){
+        this.setDirection(plugin.getUtilsManager().getDirectionCalculator().getDirection(yaw));
+        return this;
+    }
+
+    public ArenaClass setDirection(Location location){
+        this.setDirection(plugin.getUtilsManager().getDirectionCalculator().getDirection(location.getYaw()));
+        return this;
+    }
+
+    public ArenaClass setDirection(Player player){
+        this.setDirection(player.getLocation());
+        return this;
+    }
+
+    public ArenaClass setSlot(int slot,boolean slotBool) throws MaxSlotException{
+        if(slot>this.maxPlayer) throw new MaxSlotException("Slot is heigher than max player.",this.getArenaName(),this.getMaxPlayer(),slot);
+        this.slots[slot] = slotBool;
+        return this;
+    }
+
+    public boolean isFreeSlot(){
+        for(boolean b:this.slots){
+            if(!b){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getFreeSlot()throws FullSlotException {
+        if(!this.isFreeSlot()) throw new FullSlotException("Arena don't have free slots",this);
+        int slot = 0;
+        for(boolean b:this.slots){
+            if(b) return slot;
+            slot++;
+        }
+        return slot;
     }
 }
