@@ -10,7 +10,6 @@ public class DirectionCalculator {
     }
 
     public Direction getDirection(float yaw){
-        float yaw_ = yaw;
         if (yaw < 0) {
             yaw += 360;
         }

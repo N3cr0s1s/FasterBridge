@@ -1,17 +1,20 @@
 package necrosis.fasterbridge.player.classes;
 
 import necrosis.fasterbridge.arena.ArenaClass;
+import org.bukkit.inventory.ItemStack;
 
 public class EditorClass {
 
     private boolean inEditor;
     private String inArena;
     private ArenaClass arenaClass;
+    private ItemStack[] prevInv;
 
     public EditorClass(){
         this.inEditor = false;
         this.inArena = "";
         this.arenaClass = null;
+        this.prevInv = null;
     }
 
     public boolean isInEditor() {
@@ -38,6 +41,14 @@ public class EditorClass {
         this.arenaClass = arenaClass;
     }
 
+    public ItemStack[] getPrevInv() {
+        return prevInv;
+    }
+
+    public void setPrevInv(ItemStack[] prevInv) {
+        this.prevInv = prevInv;
+    }
+
     public ArenaClass setEditor(ArenaClass arenaClass) {
         this.inEditor = true;
         this.inArena = arenaClass.getArenaName();
@@ -49,5 +60,12 @@ public class EditorClass {
         this.inEditor = false;
         this.inArena = "";
         this.arenaClass = null;
+    }
+
+    public void leaveEditor(){
+        this.inEditor = false;
+        this.inArena = "";
+        this.arenaClass = null;
+        this.prevInv = null;
     }
 }

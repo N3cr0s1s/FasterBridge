@@ -5,15 +5,15 @@ import necrosis.fasterbridge.gadget.GadgetAbstract;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-public class ArenaSelectorGadget extends GadgetAbstract {
+public class ArenaEditorGadget extends GadgetAbstract {
     @Override
     public String name() {
-        return "arenaSelectorGadget";
+        return "arenaEditorGadget";
     }
 
     @Override
     public Material itemMaterial() {
-        return Material.COMPASS;
+        return Material.REDSTONE;
     }
 
     @Override
@@ -33,11 +33,11 @@ public class ArenaSelectorGadget extends GadgetAbstract {
 
     @Override
     public String permission() {
-        return "craftkit.player";
+        return "craftkit.admin";
     }
 
     @Override
     public void itemFunction(Player player) {
-        //  TODO OPEN ARENA SELECTOR UI
+        //  TODO EDITOR GUI
     }
 }

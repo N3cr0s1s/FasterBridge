@@ -1,0 +1,23 @@
+messages:
+  subcommand:
+    no-sub-command: "&5Type some sub command to execute."
+    no-permission:  "&4Player don't have permission."
+gadgets:
+  arenaSelectorGadget:
+    name:   "&7.../-&aArena&bSelect&7-\\..."
+    lore0:  "____|--|____"
+    lore1:  "&a  Right click"
+    lore2:  "&a to use this"
+    lore3:  "----|__|----"
+  arenaLeaveGadget:
+    name:   "&7...../-&4Exit&7-\\....."
+    lore0:  "____|--|____"
+    lore1:  "&a  Right click"
+    lore2:  "&a to use this"
+    lore3:  "----|__|----"
+  arenaEditorGadget:
+    name: "&7../-&5Arena&dEditor&7-\\.."
+    lore0: "....____|--|____...."
+    lore1: "&a    Right click"
+    lore2: "&a   to use this"
+    lore3: "....----|__|----...."

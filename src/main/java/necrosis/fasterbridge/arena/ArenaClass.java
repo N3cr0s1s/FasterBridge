@@ -1,6 +1,7 @@
 package necrosis.fasterbridge.arena;
 
 import necrosis.fasterbridge.FasterBridge;
+import necrosis.fasterbridge.exceptions.AllSlotSetException;
 import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
 import necrosis.fasterbridge.exceptions.FullSlotException;
 import necrosis.fasterbridge.exceptions.MaxSlotException;
@@ -74,9 +75,8 @@ public class ArenaClass {
     }
 
     public ArenaClass setSlotLocation(int slot,Location slotLocation) throws MaxSlotException{
-        if(slot > this.getMaxPlayer()){
-            throw new MaxSlotException("Slot number is bigger than max player.",this.arenaName,this.maxPlayer,slot);
-        }
+        if(slot >= this.getMaxPlayer()) throw new MaxSlotException("Slot number is bigger than max player.",this.arenaName,this.maxPlayer,slot);
+        if(this.slotLocation.length <= slot) throw new MaxSlotException("Slot number is bigger than max player.",this.arenaName,this.maxPlayer,slot);
         this.slotLocation[slot] = slotLocation;
         this.save();
         return this;
@@ -103,6 +103,8 @@ public class ArenaClass {
             this.plugin.getConfigManager().getArenasConfig().saveArena(this.arenaName);
         } catch (ArenaNotFoundException e) {
             e.printStackTrace();
+        } catch (MaxSlotException e) {
+            e.printStackTrace();
         }
         return this;
     }
@@ -111,16 +113,18 @@ public class ArenaClass {
         return deathZoneVertical;
     }
 
-    public void setDeathZoneVertical(int deathZoneVertical) {
+    public ArenaClass setDeathZoneVertical(int deathZoneVertical) {
         this.deathZoneVertical = deathZoneVertical;
+        return this;
     }
 
     public int getDeathZoneHorizontal() {
         return deathZoneHorizontal;
     }
 
-    public void setDeathZoneHorizontal(int deathZoneHorizontal) {
+    public ArenaClass setDeathZoneHorizontal(int deathZoneHorizontal) {
         this.deathZoneHorizontal = deathZoneHorizontal;
+        return this;
     }
 
     public ArenaClass register(){
@@ -174,5 +178,14 @@ public class ArenaClass {
             slot++;
         }
         return slot;
+    }
+
+    public int getUnsetSlot()throws AllSlotSetException {
+        for(int i = 0; i<maxPlayer; i++){
+            if(this.slotLocation[i] == null){
+                return i;
+            }
+        }
+        throw new AllSlotSetException("All slot setted correctly.");
     }
 }

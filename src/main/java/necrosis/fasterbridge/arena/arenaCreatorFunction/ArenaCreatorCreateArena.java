@@ -3,6 +3,7 @@ package necrosis.fasterbridge.arena.arenaCreatorFunction;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.arena.ArenaClass;
 import necrosis.fasterbridge.arena.Direction;
+import necrosis.fasterbridge.exceptions.ArenaAlreadyExist;
 import org.bukkit.Location;
 
 public class ArenaCreatorCreateArena {
@@ -13,7 +14,9 @@ public class ArenaCreatorCreateArena {
         this.plugin = plugin;
     }
 
-    public ArenaClass createArena(String arenaName, int maxPlayer, boolean isActive, Location[] locations, int deathZoneHorizontal, int deathZoneVertical, Direction direction){
+    public ArenaClass createArena(String arenaName, int maxPlayer, boolean isActive, Location[] locations, int deathZoneHorizontal, int deathZoneVertical, Direction direction)
+    throws ArenaAlreadyExist {
+        if(this.plugin.getArenaManager().isArenaExist(arenaName)) throw new ArenaAlreadyExist("Arena already exist.",arenaName);
         return new ArenaClass(
                 arenaName,
                 maxPlayer,
@@ -28,36 +31,24 @@ public class ArenaCreatorCreateArena {
                 .save();
     }
 
-    public ArenaClass createArena(String arenaName){
-        return this.createArena(
-                arenaName,
-                2,
-                false,
-                null,
-                10,
-                5,
-                Direction.NORTH
-                );
-    }
-
-    public ArenaClass createArena(String arenaName,int maxPlayer){
+    public ArenaClass createArena(String arenaName,int maxPlayer) throws ArenaAlreadyExist {
         return this.createArena(
                 arenaName,
                 maxPlayer,
                 false,
-                null,
+                new Location[maxPlayer],
                 10,
                 5,
                 Direction.NORTH
         );
     }
 
-    public ArenaClass createArena(String arenaName,int maxPlayer,int deathZoneHorizontal,int deathzoneVertical){
+    public ArenaClass createArena(String arenaName,int maxPlayer,int deathZoneHorizontal,int deathzoneVertical) throws ArenaAlreadyExist {
         return this.createArena(
                 arenaName,
                 maxPlayer,
                 false,
-                null,
+                new Location[maxPlayer],
                 deathZoneHorizontal,
                 deathzoneVertical,
                 Direction.NORTH

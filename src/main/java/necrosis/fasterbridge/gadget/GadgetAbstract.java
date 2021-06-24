@@ -1,5 +1,6 @@
 package necrosis.fasterbridge.gadget;
 
+import cornerlesscube.craftkit.CraftKit;
 import cornerlesscube.craftkit.ExcludeFromAutoRegister;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.exceptions.GadgetNotRegisteredException;
@@ -11,6 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -79,6 +82,28 @@ public abstract class GadgetAbstract implements GadgetMethodInterface{
                 if (this.gadget.gadget.getItemMeta() == null) return;
                 if (!event.getItem().getItemMeta().equals(this.gadget.gadget.getItemMeta())) return;
                 this.gadget.itemFunction(event.getPlayer());
+            }
+        }
+
+        @EventHandler
+        public void onBlockPlace(BlockPlaceEvent event){
+            if(CraftKit.getInstance().getNms().getNmsVersion().contains("v1_8")){
+                if(event.getPlayer().getInventory().getItemInHand().getItemMeta().
+                        equals(this.gadget.gadget.getItemMeta())){
+                    event.setCancelled(true);
+                }
+                return;
+            }
+            if(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().
+                    equals(this.gadget.gadget.getItemMeta())){
+                event.setCancelled(true);
+            }
+        }
+
+        @EventHandler
+        public void onDrop(PlayerDropItemEvent event){
+            if(event.getItemDrop().getItemStack().getItemMeta().equals(this.gadget.gadget.getItemMeta())){
+                event.setCancelled(true);
             }
         }
     }

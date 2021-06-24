@@ -45,4 +45,10 @@ public final class ArenaManager {
         return playerClass;
     }
 
+    public boolean isArenaExist(String arenaName){
+        if(this.arenaMap.containsKey(arenaName)){
+            return true;
+        }
+        return false;
+    }
 }
