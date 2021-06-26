@@ -30,12 +30,17 @@ public class ArenaPlayerLeave {
 
         //  PLAYER
         player.getInventory().clear();
+        player.updateInventory();
         player.getInventory().setContents(playerClass.getGame().getPrevInv());
+        player.updateInventory();
         player.teleport(playerClass.getGame().getStartLoc());
 
         //  CLEAR MEMORY
         playerClass.getGame().setPrevInv(null);
         playerClass.getGame().setStartLoc(null);
+
+        this.plugin.getGameManager().getActionTimer().stopActionTimer(player);
+        playerClass.getGame().deleteBlock();
 
         return arena;
     }

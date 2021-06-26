@@ -23,14 +23,16 @@ public class SlotPlaceBlock extends FunctionBlockAbstract {
 
     @Override
     public String displayName() {
-        return "&5[&l&fSlotSet&r&5]";
+        return FasterBridge.instance.cfs("functionBlocks.slotPlace.name");
     }
 
     @Override
     public String[] lore() {
         return new String[]{
-                "Set the next",
-                "slot location"
+                FasterBridge.instance.cfs("functionBlocks.slotPlace.lore0"),
+                FasterBridge.instance.cfs("functionBlocks.slotPlace.lore1"),
+                FasterBridge.instance.cfs("functionBlocks.slotPlace.lore2"),
+                FasterBridge.instance.cfs("functionBlocks.slotPlace.lore3")
         };
     }
 
@@ -44,19 +46,15 @@ public class SlotPlaceBlock extends FunctionBlockAbstract {
                     location,
                     slot
             );
-            player.sendMessage(
-                    ChatColor.translateAlternateColorCodes('&',
-                            "&2Arena slot location successfully setted. &5[&7"+arenaName+",slot location:"+slot+"&5]"
-                    )
-            );
+            player.sendMessage(FasterBridge.instance.cfs("functionBlocks.slotPlace.succ","%placeHolder%",arenaName+",slot location:"+slot));
+            FasterBridge.instance.getArenaManager().getArena(arenaName).setDirection(location);
+
         } catch (ArenaNotFoundException e) {
             e.printStackTrace();
         } catch (MaxSlotException e) {
             e.printStackTrace();
         } catch (AllSlotSetException e) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                    "&aAll slot setted. &5[&7" +FasterBridge.instance.getPlayerManager().getPlayerClass(player).getEditor().getInArena()+"&5]"
-            ));
+            player.sendMessage(FasterBridge.instance.cfs("functionBlocks.slotPlace.done","%arenaName%",FasterBridge.instance.getPlayerManager().getPlayerClass(player).getEditor().getInArena()));
         }
     }
 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 public final class PlayerManager {
 
     private FasterBridge plugin;
-    private HashMap<UUID,PlayerClass> playerClassMap = new HashMap<UUID,PlayerClass>();
+    private final HashMap<UUID,PlayerClass> playerClassMap = new HashMap<UUID,PlayerClass>();
 
     public PlayerManager(FasterBridge plugin){
         this.plugin = plugin;
@@ -34,6 +34,10 @@ public final class PlayerManager {
         if(!isPlayerExist(player)) return;
         playerClassMap.remove(player.getUniqueId());
         return;
+    }
+
+    public HashMap<UUID,PlayerClass> getPlayerClassMap(){
+        return this.playerClassMap;
     }
 
     public PlayerClass getPlayerClass(Player player){

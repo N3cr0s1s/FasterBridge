@@ -82,11 +82,12 @@ public abstract class GadgetAbstract implements GadgetMethodInterface{
                 if (this.gadget.gadget.getItemMeta() == null) return;
                 if (!event.getItem().getItemMeta().equals(this.gadget.gadget.getItemMeta())) return;
                 this.gadget.itemFunction(event.getPlayer());
+                event.setCancelled(true);
             }
         }
 
         @EventHandler
-        public void onBlockPlace(BlockPlaceEvent event){
+        public void onBlockPlace(BlockPlaceEvent event) throws GadgetNotRegisteredException {
             if(CraftKit.getInstance().getNms().getNmsVersion().contains("v1_8")){
                 if(event.getPlayer().getInventory().getItemInHand().getItemMeta().
                         equals(this.gadget.gadget.getItemMeta())){
@@ -95,7 +96,7 @@ public abstract class GadgetAbstract implements GadgetMethodInterface{
                 return;
             }
             if(event.getPlayer().getInventory().getItemInMainHand().getItemMeta().
-                    equals(this.gadget.gadget.getItemMeta())){
+                    equals(this.gadget.getGadget().getItemMeta())){
                 event.setCancelled(true);
             }
         }

@@ -13,7 +13,7 @@ public class CreateArenaSubCommand implements SubCommandInterface{
 
     @Override
     public String description() {
-        return "Create arena.";
+        return FasterBridge.instance.cfs("messages.CreateArena.desc");
     }
 
     @Override
@@ -40,16 +40,14 @@ public class CreateArenaSubCommand implements SubCommandInterface{
         try {
             FasterBridge.instance.getArenaManager().editor().getCreateArena().createArena(arenaName,maxPlayer);
             player.sendMessage(
-                    ChatColor.translateAlternateColorCodes('&',
-                            "&2Arena successfully created. &5[&7"+arenaName+"&5]"
-                            )
+                    FasterBridge.instance.cfs("messages.CreateArena.succ","%arenaName%",arenaName)
             );
         } catch (ArenaAlreadyExist arenaAlreadyExist) {
-            player.sendMessage(ChatColor.DARK_RED + "Arena already exist. " + ChatColor.LIGHT_PURPLE + "[" + ChatColor.GRAY + arenaName + ChatColor.LIGHT_PURPLE + "]" );
+            player.sendMessage(FasterBridge.instance.cfs("messages.CreateArena.already","%arenaName%",arenaName));
         } catch (Exception e){
             player.sendMessage(
                     ChatColor.translateAlternateColorCodes('&',
-                            "&2Arena successfully created. &5[&7"+arenaName+"&5]"
+                            "&cUnknown statement."
                     )
             );
         }

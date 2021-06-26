@@ -27,7 +27,7 @@ public class ArenaClass {
         this.slotLocation = locations;
         this.isActive = false;
         this.deathZoneHorizontal = 10;
-        this.deathZoneHorizontal = 5;
+        this.deathZoneVertical = 5;
         this.direction = Direction.NORTH;
         this.slots = new boolean[maxPlayer];
     }
@@ -39,7 +39,7 @@ public class ArenaClass {
         this.isActive = false;
         this.slotLocation = new Location[maxPlayer];
         this.deathZoneHorizontal = 10;
-        this.deathZoneHorizontal = 5;
+        this.deathZoneVertical = 5;
         this.direction = Direction.NORTH;
         this.slots = new boolean[maxPlayer];
     }
@@ -51,7 +51,7 @@ public class ArenaClass {
         this.isActive = isActive;
         this.slotLocation = locations;
         this.deathZoneHorizontal = deathZoneHorizontal;
-        this.deathZoneHorizontal = deathZoneVertical;
+        this.deathZoneVertical = deathZoneVertical;
         this.direction = direction;
         this.slots = new boolean[maxPlayer];
     }
@@ -174,7 +174,7 @@ public class ArenaClass {
         if(!this.isFreeSlot()) throw new FullSlotException("Arena don't have free slots",this);
         int slot = 0;
         for(boolean b:this.slots){
-            if(b) return slot;
+            if(!b) return slot;
             slot++;
         }
         return slot;
@@ -188,4 +188,31 @@ public class ArenaClass {
         }
         throw new AllSlotSetException("All slot setted correctly.");
     }
+
+    public int getFreeSlots(){
+        int slot = 0;
+        for(boolean b:this.slots){
+            if(!b) slot++;
+        }
+        return slot;
+    }
+
+    public boolean isValid(){
+        if(this.arenaName == null || this.arenaName.equals("")) return false;
+        try {
+            this.setDirection(getSlotLocation(0));
+        } catch (MaxSlotException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e){
+            return false;
+        }
+        for(Location loc : this.slotLocation){
+            if(loc == null){
+                return false;
+            }
+        }
+         return true;
+    }
+
 }

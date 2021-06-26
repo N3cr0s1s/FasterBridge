@@ -3,7 +3,13 @@ package necrosis.fasterbridge.player.classes;
 import cornerlesscube.craftkit.utils.Stopwatch;
 import necrosis.fasterbridge.arena.ArenaClass;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameClass {
 
@@ -13,6 +19,8 @@ public class GameClass {
     private Location startLoc;
     private final Stopwatch stopwatch;
     private ItemStack[] prevInv;
+    private List<Block> blocks;
+    private BukkitTask bukkitTask;
 
     public GameClass(){
         this.inGame = false;
@@ -21,6 +29,8 @@ public class GameClass {
         this.startLoc = null;
         this.stopwatch = new Stopwatch();
         this.prevInv = null;
+        this.blocks = new ArrayList<>();
+        this.bukkitTask = null;
     }
 
     public boolean isInGame() {
@@ -65,5 +75,27 @@ public class GameClass {
 
     public void setPrevInv(ItemStack[] prevInv) {
         this.prevInv = prevInv;
+    }
+
+    public List<Block> getBlocks() {
+        return blocks;
+    }
+
+    public void addBlock(Block block){
+        this.blocks.add(block);
+    }
+
+    public void deleteBlock(){
+        for(Block b : this.blocks){
+            b.setType(Material.AIR);
+        }
+    }
+
+    public BukkitTask getBukkitTask() {
+        return bukkitTask;
+    }
+
+    public void setBukkitTask(BukkitTask bukkitTask) {
+        this.bukkitTask = bukkitTask;
     }
 }

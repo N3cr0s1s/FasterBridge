@@ -14,7 +14,7 @@ public class GetFunctionBlockSubCommand implements SubCommandInterface{
 
     @Override
     public String description() {
-        return "Give function block to player.";
+        return FasterBridge.instance.cfs("messages.GetFunction.desc");
     }
 
     @Override
@@ -33,7 +33,7 @@ public class GetFunctionBlockSubCommand implements SubCommandInterface{
                 !FasterBridge.instance.getPlayerManager().getPlayerClass(player)
                         .getEditor().isInEditor()
         ){
-            player.sendMessage("Only in editor mode.");
+            player.sendMessage(FasterBridge.instance.cfs("messages.GetFunction.only"));
             return;
         }
         try {
@@ -42,10 +42,10 @@ public class GetFunctionBlockSubCommand implements SubCommandInterface{
                     FasterBridge.instance.getFunctionBlockManager().getFunctionBlock(args[1]).getFunctionBlock()
                 );
             } catch (FunctionBlockNotRegisteredException e) {
-                player.sendMessage("Function block not registered.");
+                player.sendMessage(FasterBridge.instance.cfs("messages.GetFunction.registernt"));
             }
         } catch (FuncBlockDoesNotExistException e) {
-            player.sendMessage("Function block does not exist.");
+            player.sendMessage(FasterBridge.instance.cfs("messages.GetFunction.existnt"));
         } catch (ArrayIndexOutOfBoundsException ex){
             player.sendMessage(ChatColor.RED + syntax());
         }

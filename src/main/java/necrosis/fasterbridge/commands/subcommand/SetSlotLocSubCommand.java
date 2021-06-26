@@ -14,7 +14,7 @@ public class SetSlotLocSubCommand implements SubCommandInterface{
 
     @Override
     public String description() {
-        return "Set slot locations in arena.";
+        return FasterBridge.instance.cfs("messages.SetLoc.desc");
     }
 
     @Override
@@ -45,23 +45,11 @@ public class SetSlotLocSubCommand implements SubCommandInterface{
         }
         try {
             FasterBridge.instance.getArenaManager().editor().location().setLocation(FasterBridge.instance.getArenaManager().getArena(arenaName),player,slot);
-            player.sendMessage(
-                    ChatColor.translateAlternateColorCodes('&',
-                            "&2Arena slot location successfully setted. &5[&7"+arenaName+",slot location:"+slot+"&5]"
-                    )
-            );
+            player.sendMessage(FasterBridge.instance.cfs("messages.SetLoc.succ","%arenaSlot%",arenaName+", slotLocation: " + slot));
         } catch (ArenaNotFoundException e) {
-            player.sendMessage(
-                    ChatColor.translateAlternateColorCodes('&',
-                            "&4Arena not found. &d[&7" + arenaName + "&d]"
-                            )
-            );
+            player.sendMessage(FasterBridge.instance.cfs("messages.SetLoc.notfound","%arenaName%",arenaName));
         } catch (MaxSlotException e) {
-            player.sendMessage(
-                    ChatColor.translateAlternateColorCodes('&',
-                            "&4Slot is bigger than max player. &d[&7" + e.getSlot() + " >= "+e.getMaxPlayer() + "&d]"
-                    )
-            );
+            FasterBridge.instance.cfs("messages.SetLoc.bigger","%placeHolder%",e.getSlot() + " >= " + e.getMaxPlayer());
         }
     }
 }

@@ -13,7 +13,7 @@ public class JoinEditorSubCommand implements SubCommandInterface{
 
     @Override
     public String description() {
-        return "Join or leave editor.";
+        return FasterBridge.instance.cfs("messages.JoinEditor.desc");
     }
 
     @Override
@@ -30,9 +30,7 @@ public class JoinEditorSubCommand implements SubCommandInterface{
     public void execute(Player player, String[] args) {
         if(FasterBridge.instance.getPlayerManager().getPlayerClass(player).getEditor().isInEditor()){
             FasterBridge.instance.getArenaManager().player().getArenaPlayerLeaveEditor().leaveEditor(player);
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                    "&aSuccessfully leaved editor."
-            ));
+            player.sendMessage(FasterBridge.instance.cfs("messages.JoinEditor.leave"));
             return;
         }
         String arenaName = "";
@@ -48,13 +46,9 @@ public class JoinEditorSubCommand implements SubCommandInterface{
             FasterBridge.instance.getArenaManager().player().getArenaPlayerJoinEditor().joinEditor(
                     player,arenaName
             );
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                    "&aSuccessfully joined editor. &5[&7"+arenaName+"&5]"
-            ));
+            player.sendMessage(FasterBridge.instance.cfs("messages.JoinEditor.joined","%arenaName%",arenaName));
         } catch (ArenaNotFoundException e) {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                    "&4Arena not found. &5[&7"+arenaName+"&5]"
-            ));
+            player.sendMessage(FasterBridge.instance.cfs("messages.JoinEditor.notfound","%arenaName%",arenaName));
             return;
         }
     }

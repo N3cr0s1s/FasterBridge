@@ -27,7 +27,9 @@ public class SubCommandHandler extends CommandBase{
                 new CreateArenaSubCommand(),
                 new SetSlotLocSubCommand(),
                 new JoinEditorSubCommand(),
-                new GetFunctionBlockSubCommand()
+                new GetFunctionBlockSubCommand(),
+                new JoinArenaSubCommand(),
+                new ArenaTestSubCommand()
         );
     }
     private List<SubCommandInterface> subcommands = new ArrayList<>();

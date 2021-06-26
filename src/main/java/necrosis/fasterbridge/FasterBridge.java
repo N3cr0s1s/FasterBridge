@@ -5,13 +5,18 @@ import necrosis.fasterbridge.arena.ArenaManager;
 import necrosis.fasterbridge.config.ConfigManager;
 import necrosis.fasterbridge.events.editorEvents.blockPlace.FunctionBlockManager;
 import necrosis.fasterbridge.events.playerEvents.PlayerEventsJoin;
+import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
+import necrosis.fasterbridge.exceptions.MaxSlotException;
+import necrosis.fasterbridge.exceptions.NotInArenaException;
 import necrosis.fasterbridge.gadget.GadgetManager;
-import necrosis.fasterbridge.gadget.gadgets.ArenaEditorGadget;
-import necrosis.fasterbridge.gadget.gadgets.ArenaLeaveGadget;
-import necrosis.fasterbridge.gadget.gadgets.ArenaSelectorGadget;
+import necrosis.fasterbridge.game.GameManager;
+import necrosis.fasterbridge.player.PlayerClass;
 import necrosis.fasterbridge.player.PlayerManager;
 import necrosis.fasterbridge.ui.UIManager;
 import necrosis.fasterbridge.utils.UtilsManager;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 public final class FasterBridge extends PluginEntry {
 
@@ -23,8 +28,9 @@ public final class FasterBridge extends PluginEntry {
     private final ArenaManager arenaManager = new ArenaManager(this);
     private final UtilsManager utilsManager = new UtilsManager(this);
     private final GadgetManager gadgetManager = new GadgetManager(this);
-    private final UIManager uiManager = new UIManager(this);
     private final FunctionBlockManager functionBlockManager = new FunctionBlockManager(this);
+    private final UIManager uiManager = new UIManager(this);
+    private final GameManager gameManager = new GameManager(this);
 
     @Override
     public void onEnable() {
@@ -43,10 +49,26 @@ public final class FasterBridge extends PluginEntry {
 
         this.gadgetManager.registerGadget();
         this.functionBlockManager.registerFunctionBlock();
+        this.uiManager.registerUIs();
+
+        for(Player player: Bukkit.getOnlinePlayers()) this.playerManager.createPlayerClass(player);
     }
 
     @Override
     public void onDisable() {
+        for(PlayerClass p:this.playerManager.getPlayerClassMap().values()){
+            if(p.getGame().isInGame()){
+                try {
+                    this.arenaManager.player().getArenaPlayerLeave().leaveArena(Bukkit.getPlayer(p.getPlayerUUID()));
+                } catch (NotInArenaException e) {
+                    e.printStackTrace();
+                } catch (ArenaNotFoundException e) {
+                    e.printStackTrace();
+                } catch (MaxSlotException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public PlayerManager getPlayerManager() {
@@ -75,5 +97,17 @@ public final class FasterBridge extends PluginEntry {
 
     public FunctionBlockManager getFunctionBlockManager() {
         return functionBlockManager;
+    }
+
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+
+    public String cfs(String path){
+        return ChatColor.translateAlternateColorCodes('&',this.getConfig().getString(path));
+    }
+
+    public String cfs(String path,String replace,String toReplace){
+        return ChatColor.translateAlternateColorCodes('&',this.getConfig().getString(path).replace(replace,toReplace));
     }
 }

@@ -14,7 +14,7 @@ public class GiveGadgetSubCommand implements SubCommandInterface{
 
     @Override
     public String description() {
-        return "Give gadge to player.";
+        return FasterBridge.instance.cfs("messages.GetGadget.desc");
     }
 
     @Override
@@ -32,7 +32,7 @@ public class GiveGadgetSubCommand implements SubCommandInterface{
         try {
             player.getInventory().addItem(FasterBridge.instance.getGadgetManager().getGadget(args[1]).getGadget());
         } catch (GadgetNotExistException | GadgetNotRegisteredException e) {
-            player.sendMessage("Gadget not found.");
+            player.sendMessage(FasterBridge.instance.cfs("messages.GetGadget.notfound","%gadget%",args[1]));
         } catch (ArrayIndexOutOfBoundsException ex){
             player.sendMessage(ChatColor.RED + this.syntax());
         }

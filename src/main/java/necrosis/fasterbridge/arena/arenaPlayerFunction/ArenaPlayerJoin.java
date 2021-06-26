@@ -2,9 +2,7 @@ package necrosis.fasterbridge.arena.arenaPlayerFunction;
 
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.arena.ArenaClass;
-import necrosis.fasterbridge.exceptions.ArenaNotValidException;
-import necrosis.fasterbridge.exceptions.FullSlotException;
-import necrosis.fasterbridge.exceptions.MaxSlotException;
+import necrosis.fasterbridge.exceptions.*;
 import necrosis.fasterbridge.player.PlayerClass;
 import org.bukkit.entity.Player;
 
@@ -27,7 +25,6 @@ public class ArenaPlayerJoin {
         playerClass.getGame().setInArena(arena.getArenaName());
         playerClass.getGame().setStartLoc(player.getLocation());
         playerClass.getGame().setSlot(slot);
-        playerClass.getGame().getStopwatch().start();
         playerClass.getGame().setPrevInv(player.getInventory().getContents());
 
         //  ARENA CLASS
@@ -37,9 +34,25 @@ public class ArenaPlayerJoin {
         player.getInventory().clear();
 
         player.getInventory().setItem(0,playerClass.getBlock());
+        try {
+            player.getInventory().setItem(4,
+                    this.plugin.getGadgetManager().getGadget("arenaLeaveGadget").getGadget()
+                    );
+        } catch (GadgetNotRegisteredException e) {
+            e.printStackTrace();
+        } catch (GadgetNotExistException e) {
+            e.printStackTrace();
+        }
 
         player.teleport(arena.getSlotLocation(slot));
 
+        this.plugin.getGameManager().getActionTimer().startActionTimer(player);
+
         return arena;
+    }
+
+    public ArenaClass joinArena(Player player,String arenaName) throws ArenaNotValidException, FullSlotException, MaxSlotException, ArenaNotFoundException {
+        ArenaClass arena = this.plugin.getArenaManager().getArena(arenaName);
+        return this.joinArena(player,arena);
     }
 }

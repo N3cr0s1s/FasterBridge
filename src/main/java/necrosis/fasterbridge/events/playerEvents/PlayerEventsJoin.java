@@ -2,6 +2,9 @@ package necrosis.fasterbridge.events.playerEvents;
 
 import cornerlesscube.craftkit.ExcludeFromAutoRegister;
 import necrosis.fasterbridge.FasterBridge;
+import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
+import necrosis.fasterbridge.exceptions.MaxSlotException;
+import necrosis.fasterbridge.exceptions.NotInArenaException;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -22,7 +25,13 @@ public class PlayerEventsJoin implements Listener {
     }
 
     @EventHandler
-    public void onPlayerLeave(PlayerQuitEvent event){
+    public void onPlayerLeave(PlayerQuitEvent event) throws MaxSlotException, ArenaNotFoundException, NotInArenaException {
+        if(this.plugin.getPlayerManager().getPlayerClass(event.getPlayer()).getGame().isInGame()) {
+            this.plugin.getArenaManager().player().getArenaPlayerLeave().leaveArena(event.getPlayer());
+        }
+        if(this.plugin.getPlayerManager().getPlayerClass(event.getPlayer()).getEditor().isInEditor()) {
+            this.plugin.getArenaManager().player().getArenaPlayerLeaveEditor().leaveEditor(event.getPlayer());
+        }
         plugin.getPlayerManager().removePlayerClass(event.getPlayer());
     }
 }

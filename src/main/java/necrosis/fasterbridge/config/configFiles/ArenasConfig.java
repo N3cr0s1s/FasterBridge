@@ -87,13 +87,9 @@ public final class ArenasConfig {
             }
             Direction direction = Direction.NORTH;
             try{
-                for(Location l:locations){
-                    if(l == null) continue;
-                    plugin.getUtilsManager().getDirectionCalculator().getDirection(l.getYaw());
-                    break;
-                }
+                direction =this.plugin.getUtilsManager().getDirectionCalculator().getDirection(locations[0].getYaw());
             }catch (Exception e){
-
+                this.plugin.logger().getError("DIRECTION NOT SETUP CORRECTLY,PLEASE FIX IN THE ARENA EDITOR! &5[ " +arenaName + " &5]");
             }
             arena = plugin.getArenaManager().editor().getCreateArena().createArena(
                     name,
@@ -122,5 +118,12 @@ public final class ArenasConfig {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void resetLocations(String arenaName) throws ArenaNotFoundException, MaxSlotException {
+        ArenaClass arenaClass = this.plugin.getArenaManager().getArena(arenaName);
+        this.arenasConfig.YamlConfig.getConfigurationSection(arenaName+".slotLocations");
+        arenaClass.setSlotLocation(new Location[arenaClass.getMaxPlayer()]);
+        this.saveArena(arenaName);
     }
 }

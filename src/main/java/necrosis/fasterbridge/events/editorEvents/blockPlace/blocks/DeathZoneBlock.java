@@ -21,15 +21,16 @@ public class DeathZoneBlock extends FunctionBlockAbstract {
 
     @Override
     public String displayName() {
-        return "&5[&l&0DeathZoneSet&r&5]";
+        return FasterBridge.instance.cfs("functionBlocks.deathZone.name");
     }
 
     @Override
     public String[] lore() {
         return new String[]{
-                "Set deathzone",
-                "under this value",
-                "player dies."
+                FasterBridge.instance.cfs("functionBlocks.deathZone.lore0"),
+                FasterBridge.instance.cfs("functionBlocks.deathZone.lore1"),
+                FasterBridge.instance.cfs("functionBlocks.deathZone.lore2"),
+                FasterBridge.instance.cfs("functionBlocks.deathZone.lore3")
         };
     }
 
@@ -41,13 +42,7 @@ public class DeathZoneBlock extends FunctionBlockAbstract {
             ).setDeathZoneVertical(
                     (int) location.getY()
             ).save();
-            player.sendMessage(
-                    ChatColor.translateAlternateColorCodes('&',
-                            "&aVertical deathzone successfully setted. &5[&l&7" +
-                                    FasterBridge.instance.getPlayerManager().getPlayerClass(player).getEditor().getInArena() +
-                                    "&r&7, deathZone: &l&7" + (int) location.getY() + "&r&5]"
-                            )
-            );
+            player.sendMessage(FasterBridge.instance.cfs("functionBlocks.deathZone.set","%placeHolder%",FasterBridge.instance.getPlayerManager().getPlayerClass(player).getEditor().getInArena() + "&r&7, deathZone: &l&7" + (int) location.getY()));
         } catch (ArenaNotFoundException e) {
             e.printStackTrace();
         }

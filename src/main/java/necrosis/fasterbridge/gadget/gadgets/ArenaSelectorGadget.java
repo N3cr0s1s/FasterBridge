@@ -38,6 +38,6 @@ public class ArenaSelectorGadget extends GadgetAbstract {
 
     @Override
     public void itemFunction(Player player) {
-        //  TODO OPEN ARENA SELECTOR UI
+        FasterBridge.instance.getUiManager().openArenaSelector(player);
     }
 }

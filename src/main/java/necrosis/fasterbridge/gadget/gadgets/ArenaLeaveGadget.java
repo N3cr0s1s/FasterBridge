@@ -1,6 +1,9 @@
 package necrosis.fasterbridge.gadget.gadgets;
 
 import necrosis.fasterbridge.FasterBridge;
+import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
+import necrosis.fasterbridge.exceptions.MaxSlotException;
+import necrosis.fasterbridge.exceptions.NotInArenaException;
 import necrosis.fasterbridge.gadget.GadgetAbstract;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -40,7 +43,14 @@ public class ArenaLeaveGadget extends GadgetAbstract {
 
     @Override
     public void itemFunction(Player player) {
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&',"&4EXIT ARENA"));
-        //  TODO EXIT ARENA
+        try {
+            FasterBridge.instance.getArenaManager().player().getArenaPlayerLeave().leaveArena(player);
+        } catch (NotInArenaException e) {
+            player.sendMessage(FasterBridge.instance.cfs("gadgets.arenaSelectorGadget.notarena"));
+        } catch (ArenaNotFoundException e) {
+            e.printStackTrace();
+        } catch (MaxSlotException e) {
+            e.printStackTrace();
+        }
     }
 }

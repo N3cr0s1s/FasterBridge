@@ -38,6 +38,6 @@ public class ArenaEditorGadget extends GadgetAbstract {
 
     @Override
     public void itemFunction(Player player) {
-        //  TODO EDITOR GUI
+        FasterBridge.instance.getUiManager().openEditor(player);
     }
 }
