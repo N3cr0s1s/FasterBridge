@@ -7,3 +7,4 @@ depend: [ CraftKit ]
 softdepend: [ CraftKit ]
 authors: [ Necrosis ]
 description: FastBridge plugin.
+load: POSTWORLD

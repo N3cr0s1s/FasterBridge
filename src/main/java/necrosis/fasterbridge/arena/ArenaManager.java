@@ -32,6 +32,11 @@ public final class ArenaManager {
         return arenaClass;
     }
 
+    public void unloadArena(String arenaName) throws ArenaNotFoundException {
+        if(!isArenaExist(arenaName))throw new ArenaNotFoundException("Arena does not exist!");
+        this.arenaMap.remove(arenaName);
+    }
+
     public ArenaClass getArena(String arenaName) throws ArenaNotFoundException {
         if(!this.arenaMap.containsKey(arenaName)) throw new ArenaNotFoundException("Arena does not exist.");
         return this.arenaMap.get(arenaName);
@@ -43,5 +48,12 @@ public final class ArenaManager {
 
     public ArenaPlayerClass player() {
         return playerClass;
+    }
+
+    public boolean isArenaExist(String arenaName){
+        if(this.arenaMap.containsKey(arenaName)){
+            return true;
+        }
+        return false;
     }
 }

@@ -1,0 +1,117 @@
+messages:
+  subcommand:
+    no-sub-command: "&5Type some sub command to execute."
+    no-permission:  "&4Player don't have permission."
+  ArenaTest:
+    desc: "Test arena objects."
+  CreateArena:
+    desc: "Create arena"
+    succ: "&2Arena successfully created. &5[ &7%arenaName% &5]"
+    already: "&cArena already exist. &5[ &7%arenaName% &5]"
+  GetFunction:
+    desc: "Give function block to player."
+    only: "&cOnly in editor mode."
+    registernt: "&cFunction block not registered."
+    existnt: "&cFunction block does not exist."
+  GetGadget:
+    desc: "Give gadget to player."
+    notfound: "&cGadget not found &5[ &7%gadget% &5]"
+  JoinArena:
+    desc: "Join to arena."
+    full: "&cArena is full. &5[ &7%arenaName% &5]"
+    notfound: "&cArena not found. &5[ &7%arenaName% &5]"
+    already: "&cYou already in arena. &5[ &7%arenaName% &5]"
+  JoinEditor:
+    desc: "Join or leave arena."
+    leave: "&aSuccessfully leaved editor."
+    joined: "&aSuccessfully joined to editor. &5[ &7%arenaName% &5]"
+    notfound: "&cArena not found. &5[ &7%arenaName% &5]"
+  SetLoc:
+    desc: "Set arena location."
+    succ: "&aArena slot location successfully setted. &5[ &7%arenaSlot% &5]"
+    notfound: "&cArena not found. &5[ &7%arenaName% &5]"
+    bigger: "&cSlot is bigger then maxplayer. &5[ &7%placeHolder% &5]"
+  newRecord:
+    title: "&a&lNew record!"
+    subTitle: "&5[ &7&l%time% &r&5]"
+
+gadgets:
+  arenaSelectorGadget:
+    name:   "&7.../-&aArena&bSelect&7-\\..."
+    lore0:  "____|--|____"
+    lore1:  "&a  Right click"
+    lore2:  "&a to use this"
+    lore3:  "----|__|----"
+  arenaLeaveGadget:
+    notarena: "&cYou're not in an arena."
+    name:   "&7...../-&4Exit&7-\\....."
+    lore0:  "____|--|____"
+    lore1:  "&a  Right click"
+    lore2:  "&a to use this"
+    lore3:  "----|__|----"
+  arenaEditorGadget:
+    name: "&7../-&5Arena&dEditor&7-\\.."
+    lore0: "....____|--|____...."
+    lore1: "&a    Right click"
+    lore2: "&a   to use this"
+    lore3: "....----|__|----...."
+
+functionBlocks:
+  deathZone:
+    set: "&aVertical deathzone successfully setted. &5[ &7%placeHolder% &r&5]"
+    name: "&5[ &0&lDeathZoneSet&r &5]"
+    lore0: "&8..--==||||==--.."
+    lore1: "&7Set deathzone"
+    lore2: "&7under this value"
+    lore3: "&7Player dies"
+  slotPlace:
+    succ: "&aArena slot location successfully setted. &5[ &7%placeHolder% &5]"
+    done: "&aAll slot setted. &5[ &7%arenaName% &5]"
+    name: "&5[ &8SlotSet &5]"
+    lore0: "&8..--==||||==--.."
+    lore1: ""
+    lore2: "&7Set next slot location"
+    lore3: ""
+
+buttons:
+  arenaSelector:
+    notactive: "&cArena is not active."
+    isfull: "&cArena is full."
+  deathZoneHorizontal:
+    ##INCREASE DEATHZONE HORIZONTAL
+    incLore0: ""
+    incLore1: ""
+    incLore2: ""
+    incLore3: ""
+    ##DECREASE DEATHZONE HORIZONTAL
+    decLore0: ""
+    decLore1: ""
+    decLore2: ""
+    decLore3: ""
+  deathZoneVertical:
+    ##INCREASE DEATHZONE VERTICAL
+    incLore0: ""
+    incLore1: ""
+    incLore2: ""
+    incLore3: ""
+    ##DECREASE DEATHZONE VERICAL
+    decLore0: ""
+    decLore1: ""
+    decLore2: ""
+    decLore3: ""
+  arenaReset:
+    succ: "&aSlots successfully deleted."
+    lore0: ""
+    lore1: ""
+    lore2: ""
+    lore3: ""
+  leaveEditor:
+    valid: "&aArena is valid. Ready to use."
+    notvalid: "&cArena is not valid. Please fix it."
+  arenaDelete:
+    lore0: "&4!!!!!"
+    lore1: "&4&lBE CAREFUL!"
+    lore2: "&4&lBE CAREFUL!"
+    lore3: "&4!!!!!"
+    succ: "&aArena deleted! &5[ &7&l%arenaName% &r&5]"
+    fail: "&cArena does not exist!"
