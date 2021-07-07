@@ -23,7 +23,7 @@ public class CreateArenaSubCommand implements SubCommandInterface{
 
     @Override
     public String permission() {
-        return "craftkit.admin";
+        return "fastbridge.create";
     }
 
     @Override

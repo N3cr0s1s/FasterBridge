@@ -15,6 +15,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 
 public class GameEvents implements Listener {
 
@@ -38,7 +39,7 @@ public class GameEvents implements Listener {
         );
         if(event.getPlayer().getLocation().getY() < arena.getDeathZoneVertical()){
             this.plugin.getGameManager().getGamePlayerDeath().playerDeath(event.getPlayer());
-            event.setCancelled(true);
+            //event.setCancelled(true);
         }
     }
 
@@ -60,6 +61,15 @@ public class GameEvents implements Listener {
                 playerClass.getGame().getInArena()
         );
         if(!playerClass.getGame().getStopwatch().isRunning()) playerClass.getGame().getStopwatch().start();
+    }
+
+    @EventHandler
+    public void itemBack(BlockPlaceEvent event){
+        if(!inGame(event.getPlayer())) return;
+        try{event.getPlayer().getItemInHand().setAmount(64);}
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @EventHandler
@@ -134,5 +144,11 @@ public class GameEvents implements Listener {
         ArenaClass arena = this.plugin.getArenaManager().getArena(playerClass.getGame().getInArena());
         if(playerClass.getGame().getStopwatch().toDouble() < 2) return; //  TRY TO BLOCK ANY CHEATING / LAG / TPS DROP / SERVER LAG / EXPLOIT
         this.plugin.getGameManager().getGamePlayerWin().playerWin(event.getPlayer());
+    }
+
+    @EventHandler
+    public void onItemPickup(PlayerPickupItemEvent event){
+        if(!inGame(event.getPlayer())) return;
+        event.setCancelled(true);
     }
 }

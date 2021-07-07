@@ -1,6 +1,7 @@
 package necrosis.fasterbridge.config.configFiles;
 
 import cornerlesscube.craftkit.utils.file.yaml.YamlClass;
+import cornerlesscube.craftkit.utils.file.yaml.exceptions.FileAlreadyExistException;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.arena.ArenaClass;
 import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
@@ -16,11 +17,15 @@ public final class PlayerRecordsConfig {
 
     public PlayerRecordsConfig(FasterBridge plugin){
         this.plugin = plugin;
-        YamlClass tempConfig;
+        YamlClass tempConfig = null;
         try {
             tempConfig = plugin.configYml().getYamlClass(configName);
         }catch (Exception e){
-            tempConfig = plugin.configYml().createYaml(configName);
+            try {
+                tempConfig = plugin.configYml().createYaml(configName);
+            } catch (FileAlreadyExistException fileAlreadyExistException) {
+                fileAlreadyExistException.printStackTrace();
+            }
         }
         this.playerRecords = tempConfig;
         tempConfig=null;

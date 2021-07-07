@@ -27,7 +27,7 @@ public class JoinArenaSubCommand implements SubCommandInterface{
 
     @Override
     public String permission() {
-        return "craftkit.player";
+        return "fastbridge.join";
     }
 
     @Override

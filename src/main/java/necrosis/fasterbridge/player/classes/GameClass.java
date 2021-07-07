@@ -1,11 +1,14 @@
 package necrosis.fasterbridge.player.classes;
 
 import cornerlesscube.craftkit.utils.Stopwatch;
+import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.arena.ArenaClass;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
@@ -77,18 +80,29 @@ public class GameClass {
         this.prevInv = prevInv;
     }
 
-    public List<Block> getBlocks() {
-        return blocks;
-    }
-
     public void addBlock(Block block){
         this.blocks.add(block);
     }
 
     public void deleteBlock(){
-        for(Block b : this.blocks){
-            b.setType(Material.AIR);
-        }
+        try {
+            FasterBridge.instance.getServer().getScheduler().scheduleSyncDelayedTask(FasterBridge.instance, () -> {
+                ArrayList<Item> items = new ArrayList<>();
+                for (Block b : this.blocks) {
+                    try {
+                        items.add(b.getWorld().dropItem(b.getLocation(), new ItemStack(b.getType(), 64)));
+                    } catch (Exception e) {
+                    }
+                    b.setType(Material.AIR);
+                }
+                this.blocks.clear();
+                FasterBridge.instance.getServer().getScheduler().scheduleSyncDelayedTask(FasterBridge.instance, () -> {
+                    for (Item item : items) {
+                        item.remove();
+                    }
+                }, 20L);
+            }, 2L);
+        }catch (IllegalPluginAccessException wtf){}
     }
 
     public BukkitTask getBukkitTask() {

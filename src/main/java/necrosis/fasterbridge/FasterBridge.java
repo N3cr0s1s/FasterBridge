@@ -18,6 +18,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+/*
+
+    CREATED BY: NECROSIS
+    2021-06-xx -> 2021-07-xx
+
+ */
+
 public final class FasterBridge extends PluginEntry {
 
     public static FasterBridge instance;
@@ -43,7 +50,7 @@ public final class FasterBridge extends PluginEntry {
                 new PlayerEventsJoin(this)
         );
 
-        logger().getInfo("FasterBridge ");
+        logger().getInfo("FasterBridge");
 
         this.configManager.getArenasConfig().loadAllArena();
 
@@ -60,11 +67,7 @@ public final class FasterBridge extends PluginEntry {
             if(p.getGame().isInGame()){
                 try {
                     this.arenaManager.player().getArenaPlayerLeave().leaveArena(Bukkit.getPlayer(p.getPlayerUUID()));
-                } catch (NotInArenaException e) {
-                    e.printStackTrace();
-                } catch (ArenaNotFoundException e) {
-                    e.printStackTrace();
-                } catch (MaxSlotException e) {
+                } catch (NotInArenaException | ArenaNotFoundException | MaxSlotException e) {
                     e.printStackTrace();
                 }
             }
@@ -110,4 +113,5 @@ public final class FasterBridge extends PluginEntry {
     public String cfs(String path,String replace,String toReplace){
         return ChatColor.translateAlternateColorCodes('&',this.getConfig().getString(path).replace(replace,toReplace));
     }
+
 }

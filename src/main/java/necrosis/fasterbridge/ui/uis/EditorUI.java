@@ -418,6 +418,49 @@ public class EditorUI extends UIAbstract {
         }catch (ArenaNotFoundException e){
 
         }
+        //  DELETE ARENA
+        list.add(new ButtonInterface() {
+            @Override
+            public int slot() {
+                return 17;
+            }
+
+            @Override
+            public ItemStack item(Player player) {
+                return FasterBridge.instance.getUiManager().createItem(
+                        Material.getMaterial("REDSTONE_BLOCK"),
+                        ChatColor.translateAlternateColorCodes('&',
+                                "&4ARENA REMOVE"
+                        ),
+                        true,
+                        new String[]{FasterBridge.instance.cfs("buttons.arenaDelete.lore0"),
+                                FasterBridge.instance.cfs("buttons.arenaDelete.lore1"),
+                                FasterBridge.instance.cfs("buttons.arenaDelete.lore2"),
+                                FasterBridge.instance.cfs("buttons.arenaDelete.lore3")
+                        }
+                );
+            }
+
+            @Override
+            public void click(Player player, int slot, ItemStack clicked, Inventory inv) {
+                try {
+                    String arenaName = FasterBridge.instance.getPlayerManager().getPlayerClass(player).getEditor().getInArena();
+                    FasterBridge.instance.getArenaManager().editor().getArenaDelete().deleteArena(
+                            arenaName
+                    );
+                    FasterBridge.instance.getArenaManager().player().getArenaPlayerLeaveEditor().leaveEditor(player);
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                            FasterBridge.instance.cfs("buttons.arenaDelete.succ","%arenaName%",arenaName)
+                            ));
+                    player.closeInventory();
+                } catch (ArenaNotFoundException e) {
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                            FasterBridge.instance.cfs("buttons.arenaDelete.fail")
+                    ));
+                    player.closeInventory();
+                }
+            }
+        });
         return list;
     }
 }

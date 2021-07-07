@@ -46,6 +46,7 @@ public class SubCommandHandler extends CommandBase{
             );
             String commands = "";
             for (SubCommandInterface subCommandsInterface : this.subcommands) {
+                if(!player.hasPermission(subCommandsInterface.permission())) continue;
                 commands = commands + "&7/fasterbridge &b&l" + subCommandsInterface.name() + " &r&c[&6" + subCommandsInterface.description() + "&c]\n&d" + subCommandsInterface.syntax() + "\n";
             }
             player.sendMessage(ChatColor.translateAlternateColorCodes('&',

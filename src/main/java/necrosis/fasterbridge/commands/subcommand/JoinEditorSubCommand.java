@@ -23,7 +23,7 @@ public class JoinEditorSubCommand implements SubCommandInterface{
 
     @Override
     public String permission() {
-        return "craftkit.admin";
+        return "fastbridge.editor";
     }
 
     @Override

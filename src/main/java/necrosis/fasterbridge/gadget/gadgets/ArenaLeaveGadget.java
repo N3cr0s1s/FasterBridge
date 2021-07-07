@@ -5,7 +5,6 @@ import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
 import necrosis.fasterbridge.exceptions.MaxSlotException;
 import necrosis.fasterbridge.exceptions.NotInArenaException;
 import necrosis.fasterbridge.gadget.GadgetAbstract;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -18,7 +17,7 @@ public class ArenaLeaveGadget extends GadgetAbstract {
 
     @Override
     public String permission() {
-        return "craftkit.player";
+        return "fastbridge.arenaLeaveGadget";
     }
 
     @Override

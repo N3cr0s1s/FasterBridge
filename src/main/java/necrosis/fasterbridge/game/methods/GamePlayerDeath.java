@@ -5,8 +5,6 @@ import necrosis.fasterbridge.arena.ArenaClass;
 import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
 import necrosis.fasterbridge.exceptions.MaxSlotException;
 import necrosis.fasterbridge.player.PlayerClass;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class GamePlayerDeath {
@@ -32,9 +30,7 @@ public class GamePlayerDeath {
                     )
             );
             playerClass.getGame().getStopwatch().stop();
-            for(Block block:playerClass.getGame().getBlocks()){
-                block.setType(Material.AIR);
-            }
+            playerClass.getGame().deleteBlock();
         } catch (MaxSlotException e) {
             e.printStackTrace();
         }

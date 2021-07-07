@@ -24,7 +24,7 @@ public class GetFunctionBlockSubCommand implements SubCommandInterface{
 
     @Override
     public String permission() {
-        return "craftkit.admin";
+        return "craftkit.func";
     }
 
     @Override

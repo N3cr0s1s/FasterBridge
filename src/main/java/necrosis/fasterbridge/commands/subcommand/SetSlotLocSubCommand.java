@@ -24,7 +24,7 @@ public class SetSlotLocSubCommand implements SubCommandInterface{
 
     @Override
     public String permission() {
-        return "craftkit.admin";
+        return "fastbridge.setloc";
     }
 
     @Override

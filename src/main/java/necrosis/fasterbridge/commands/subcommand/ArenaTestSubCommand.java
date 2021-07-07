@@ -23,7 +23,7 @@ public class ArenaTestSubCommand implements SubCommandInterface{
 
     @Override
     public String permission() {
-        return "craftkit.admin";
+        return "fastbridge.test";
     }
 
     @Override

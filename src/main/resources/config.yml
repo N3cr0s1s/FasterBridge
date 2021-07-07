@@ -31,6 +31,9 @@ messages:
     succ: "&aArena slot location successfully setted. &5[ &7%arenaSlot% &5]"
     notfound: "&cArena not found. &5[ &7%arenaName% &5]"
     bigger: "&cSlot is bigger then maxplayer. &5[ &7%placeHolder% &5]"
+  newRecord:
+    title: "&a&lNew record!"
+    subTitle: "&5[ &7&l%time% &r&5]"
 
 gadgets:
   arenaSelectorGadget:
@@ -105,3 +108,10 @@ buttons:
   leaveEditor:
     valid: "&aArena is valid. Ready to use."
     notvalid: "&cArena is not valid. Please fix it."
+  arenaDelete:
+    lore0: "&4!!!!!"
+    lore1: "&4&lBE CAREFUL!"
+    lore2: "&4&lBE CAREFUL!"
+    lore3: "&4!!!!!"
+    succ: "&aArena deleted! &5[ &7&l%arenaName% &r&5]"
+    fail: "&cArena does not exist!"

@@ -48,13 +48,13 @@ public class PlayerClass {
 
     public void setBlock(ItemStack block) {
         Player player = Bukkit.getPlayer(getPlayerUUID());
-        this.plugin.getConfigManager().getBlocksConfig().setBlock(player,block.getType());
+        this.plugin.getConfigManager().getBlocksConfig().setBlock(player,block.getType(),block.getItemMeta().getDisplayName());
         this.block = new ItemStack(block.getType(),64);
     }
 
     public void setBlock(Material block) {
         Player player = Bukkit.getPlayer(getPlayerUUID());
-        this.plugin.getConfigManager().getBlocksConfig().setBlock(player,block);
+        this.plugin.getConfigManager().getBlocksConfig().setBlock(player,block,block.name());
         this.block = new ItemStack(block,64);
     }
 

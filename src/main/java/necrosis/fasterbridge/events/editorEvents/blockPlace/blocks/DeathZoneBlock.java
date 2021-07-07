@@ -1,5 +1,6 @@
 package necrosis.fasterbridge.events.editorEvents.blockPlace.blocks;
 
+import cornerlesscube.craftkit.CraftKit;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.events.editorEvents.blockPlace.FunctionBlockAbstract;
 import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
@@ -16,6 +17,7 @@ public class DeathZoneBlock extends FunctionBlockAbstract {
 
     @Override
     public Material itemMaterial() {
+        if(CraftKit.getInstance().getNms().getNmsVersion().contains("16")) return Material.getMaterial("NETHERITE_BLOCK");
         return Material.getMaterial("BRICK");
     }
 

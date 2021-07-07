@@ -1,11 +1,14 @@
 package necrosis.fasterbridge.config.configFiles;
 
 import cornerlesscube.craftkit.utils.file.yaml.YamlClass;
+import cornerlesscube.craftkit.utils.file.yaml.exceptions.FileAlreadyExistException;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.player.PlayerClass;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Objects;
 
@@ -18,14 +21,17 @@ public final class BlocksConfig {
 
     public BlocksConfig(FasterBridge plugin){
         this.plugin = plugin;
-        YamlClass tempConfig;
+        YamlClass tempConfig = null;
         try {
             tempConfig = plugin.configYml().getYamlClass(configName);
         }catch (Exception e){
-            tempConfig = plugin.configYml().createYaml(configName);
+            try {
+                tempConfig = plugin.configYml().createYaml(configName);
+            } catch (FileAlreadyExistException fileAlreadyExistException) {
+                fileAlreadyExistException.printStackTrace();
+            }
         }
         this.blockConfig = tempConfig;
-        tempConfig=null;
     }
 
     public boolean isBlockSet(Player player){
@@ -35,15 +41,20 @@ public final class BlocksConfig {
         return false;
     }
 
-    public void setBlock(Player player, Material block){
+    public void setBlock(Player player, Material block,String displayName){
         PlayerClass playerClass = plugin.getPlayerManager().getPlayerClass(player);
-        this.blockConfig.write(String.valueOf(playerClass.getPlayerUUID()),block.name());
+        this.blockConfig.write(playerClass.getPlayerUUID() + ".material",block.name());
+        this.blockConfig.write(playerClass.getPlayerUUID() + ".displayName",'"'+ ChatColor.translateAlternateColorCodes('&',displayName) + '"');
     }
 
     public ItemStack getBlock(Player player){
         PlayerClass playerClass = plugin.getPlayerManager().getPlayerClass(player);
-        Material material = Material.getMaterial((String)this.blockConfig.read(String.valueOf(playerClass.getPlayerUUID())));
-        return new ItemStack(Objects.requireNonNull(material),64);
+        Material material = Material.getMaterial(String.valueOf(this.blockConfig.read(playerClass.getPlayerUUID() + ".material")));
+        ItemStack toReturn = new ItemStack(Objects.requireNonNull(material),64);
+        ItemMeta meta = toReturn.getItemMeta();
+        Objects.requireNonNull(meta).setDisplayName(ChatColor.translateAlternateColorCodes('&', String.valueOf(this.blockConfig.read(playerClass.getPlayerUUID() + ".displayName"))));
+        toReturn.setItemMeta(meta);
+        return toReturn;
     }
 
 }

@@ -33,7 +33,7 @@ public class ArenaSelectorGadget extends GadgetAbstract {
 
     @Override
     public String permission() {
-        return "craftkit.player";
+        return "fastbridge.arenaSelectorGadget";
     }
 
     @Override

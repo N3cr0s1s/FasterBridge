@@ -1,6 +1,7 @@
 package necrosis.fasterbridge.config.configFiles;
 
 import cornerlesscube.craftkit.utils.file.yaml.YamlClass;
+import cornerlesscube.craftkit.utils.file.yaml.exceptions.FileAlreadyExistException;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.arena.ArenaClass;
 import necrosis.fasterbridge.arena.Direction;
@@ -19,11 +20,15 @@ public final class ArenasConfig {
 
     public ArenasConfig(FasterBridge plugin){
         this.plugin = plugin;
-        YamlClass tempConfig;
+        YamlClass tempConfig = null;
         try {
             tempConfig = plugin.configYml().getYamlClass(configName);
         }catch (Exception e){
-            tempConfig = plugin.configYml().createYaml(configName);
+            try {
+                tempConfig = plugin.configYml().createYaml(configName);
+            } catch (FileAlreadyExistException fileAlreadyExistException) {
+                fileAlreadyExistException.printStackTrace();
+            }
         }
         this.arenasConfig = tempConfig;
         tempConfig=null;
@@ -125,5 +130,9 @@ public final class ArenasConfig {
         this.arenasConfig.YamlConfig.getConfigurationSection(arenaName+".slotLocations");
         arenaClass.setSlotLocation(new Location[arenaClass.getMaxPlayer()]);
         this.saveArena(arenaName);
+    }
+
+    public void deleteArena(String arenaName){
+        this.arenasConfig.write(arenaName,null);
     }
 }

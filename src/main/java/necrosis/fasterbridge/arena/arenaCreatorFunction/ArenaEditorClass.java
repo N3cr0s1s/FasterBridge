@@ -10,6 +10,7 @@ public class ArenaEditorClass {
     private final ArenaCreatorSetLocation setLocation;
     private final ArenaCreatorCreateArena createArena;
     private final ArenaCreatorArenaValidator validateArena;
+    private final ArenaCreatorDelete arenaDelete;
 
     public ArenaEditorClass(FasterBridge plugin){
         this.plugin = plugin;
@@ -17,6 +18,7 @@ public class ArenaEditorClass {
         this.setLocation    =       new ArenaCreatorSetLocation(plugin);
         this.createArena    =       new ArenaCreatorCreateArena(plugin);
         this.validateArena  =       new ArenaCreatorArenaValidator(plugin);
+        this.arenaDelete    =       new ArenaCreatorDelete(plugin);
     }
 
     public ArenaCreatorSetLocation location() {
@@ -29,5 +31,9 @@ public class ArenaEditorClass {
 
     public ArenaCreatorArenaValidator getValidator() {
         return validateArena;
+    }
+
+    public ArenaCreatorDelete getArenaDelete() {
+        return arenaDelete;
     }
 }
