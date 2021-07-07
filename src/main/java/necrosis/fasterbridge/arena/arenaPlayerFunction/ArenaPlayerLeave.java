@@ -15,6 +15,7 @@ public class ArenaPlayerLeave {
     }
 
     public ArenaClass leaveArena(Player player) throws NotInArenaException, ArenaNotFoundException, MaxSlotException {
+        this.plugin.getUtilsManager().getScoreboardHandler().removeScoreboard(player);
         PlayerClass playerClass = this.plugin.getPlayerManager().getPlayerClass(player);
         if(!playerClass.getGame().isInGame()) throw new NotInArenaException("Player not in arena.");
 

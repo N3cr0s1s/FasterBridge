@@ -79,39 +79,62 @@ buttons:
     isfull: "&cArena is full."
   deathZoneHorizontal:
     ##INCREASE DEATHZONE HORIZONTAL
-    incLore0: ""
-    incLore1: ""
-    incLore2: ""
-    incLore3: ""
+    inc:
+      lore:
+        - ""
+        - ""
+        - ""
+        - ""
     ##DECREASE DEATHZONE HORIZONTAL
-    decLore0: ""
-    decLore1: ""
-    decLore2: ""
-    decLore3: ""
+    dec:
+      lore:
+        - ""
+        - ""
+        - ""
+        - ""
   deathZoneVertical:
     ##INCREASE DEATHZONE VERTICAL
-    incLore0: ""
-    incLore1: ""
-    incLore2: ""
-    incLore3: ""
+    inc:
+      lore:
+        - ""
+        - ""
+        - ""
+        - ""
     ##DECREASE DEATHZONE VERICAL
-    decLore0: ""
-    decLore1: ""
-    decLore2: ""
-    decLore3: ""
+    dec:
+      lore:
+        - ""
+        - ""
+        - ""
+        - ""
   arenaReset:
     succ: "&aSlots successfully deleted."
-    lore0: ""
-    lore1: ""
-    lore2: ""
-    lore3: ""
+    lore:
+      - ""
+      - ""
+      - ""
+      - ""
   leaveEditor:
     valid: "&aArena is valid. Ready to use."
     notvalid: "&cArena is not valid. Please fix it."
   arenaDelete:
-    lore0: "&4!!!!!"
-    lore1: "&4&lBE CAREFUL!"
-    lore2: "&4&lBE CAREFUL!"
-    lore3: "&4!!!!!"
+    lore:
+      - ""
+      - ""
+      - ""
+      - ""
     succ: "&aArena deleted! &5[ &7&l%arenaName% &r&5]"
     fail: "&cArena does not exist!"
+
+scoreboard:
+  title: "&5[ &7&l%arenaName% &r&5]"
+  list:
+    - "&7Arena Name:"
+    - "&5[ &7&l%arenaName% &r&5]"
+    - "------------------"
+    - "&7Arena record:"
+    - "&5[ &6&l%record% &r&5]"
+
+config:
+  ## Braked block spawns item limit
+  spawnitem-max: 20

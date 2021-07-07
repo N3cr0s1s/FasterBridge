@@ -48,6 +48,7 @@ public class ArenaPlayerJoin {
 
         this.plugin.getGameManager().getActionTimer().startActionTimer(player);
 
+        this.plugin.getUtilsManager().getScoreboardHandler().addToScoreboard(player);
         return arena;
     }
 

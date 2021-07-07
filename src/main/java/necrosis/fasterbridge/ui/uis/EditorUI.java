@@ -28,6 +28,43 @@ public class EditorUI extends UIAbstract {
         this.manager = manager;
     }
 
+    private static String[] getLore(String buttonName){
+        List<String> lores = FasterBridge.instance.getConfig().getStringList("buttons." + buttonName+ ".lore");
+        for(int i = 0; i<lores.size(); i++){
+            lores.set(i,
+                    ChatColor.translateAlternateColorCodes('&',lores.get(i))
+                    );
+        }
+        switch (lores.size()){
+            case 0:
+                return new String[]{};
+            case 1:
+                return new String[]{
+                        lores.get(0)
+                };
+            case 2:
+                return new String[]{
+                        lores.get(0),
+                        lores.get(1)
+                };
+            case 3:
+                return new String[]{
+                        lores.get(0),
+                        lores.get(1),
+                        lores.get(2)
+                };
+            case 4:
+                return new String[]{
+                        lores.get(0),
+                        lores.get(1),
+                        lores.get(2),
+                        lores.get(3)
+                };
+            default:
+                throw new IllegalStateException("Unexpected value: " + lores.size());
+        }
+    }
+
     @Override
     public Inventory GUI(Player player) {
         super.finalName =                 ChatColor.translateAlternateColorCodes('&',
@@ -73,10 +110,7 @@ public class EditorUI extends UIAbstract {
                         Material.getMaterial("ARROW"),
                         "&5[&7+&5]",
                         false,
-                        new String[]{FasterBridge.instance.cfs("buttons.deathZoneHorizontal.incLore0"),
-                                FasterBridge.instance.cfs("buttons.deathZoneHorizontal.incLore1"),
-                                FasterBridge.instance.cfs("buttons.deathZoneHorizontal.incLore2"),
-                                FasterBridge.instance.cfs("buttons.deathZoneHorizontal.incLore3")}
+                        getLore("deathZoneHorizontal.inc")
                 );
             }
 
@@ -135,10 +169,7 @@ public class EditorUI extends UIAbstract {
                                 "&5[&7-&5]"
                         ),
                         false,
-                        new String[]{FasterBridge.instance.cfs("buttons.deathZoneHorizontal.decLore0"),
-                                FasterBridge.instance.cfs("buttons.deathZoneHorizontal.decLore1"),
-                                FasterBridge.instance.cfs("buttons.deathZoneHorizontal.decLore2"),
-                                FasterBridge.instance.cfs("buttons.deathZoneHorizontal.decLore3")}
+                        getLore("deathZoneHorizontal.dec")
                 );
             }
 
@@ -173,10 +204,7 @@ public class EditorUI extends UIAbstract {
                         Material.getMaterial("ARROW"),
                         "&5[&7+&5]",
                         false,
-                        new String[]{FasterBridge.instance.cfs("buttons.deathZoneVertical.incLore0"),
-                                FasterBridge.instance.cfs("buttons.deathZoneVertical.incLore1"),
-                                FasterBridge.instance.cfs("buttons.deathZoneVertical.incLore2"),
-                                FasterBridge.instance.cfs("buttons.deathZoneVertical.incLore3")}
+                        getLore("deathZoneVertical.inc")
                 );
             }
 
@@ -235,10 +263,7 @@ public class EditorUI extends UIAbstract {
                                 "&5[&7-&5]"
                         ),
                         false,
-                        new String[]{FasterBridge.instance.cfs("buttons.deathZoneVertical.decLore0"),
-                                FasterBridge.instance.cfs("buttons.deathZoneVertical.decLore1"),
-                                FasterBridge.instance.cfs("buttons.deathZoneVertical.decLore2"),
-                                FasterBridge.instance.cfs("buttons.deathZoneVertical.decLore3")}
+                        getLore("deathZoneVertical.dec")
                 );
             }
 
@@ -303,10 +328,7 @@ public class EditorUI extends UIAbstract {
                                 "&4RESET ARENA"
                         ),
                         false,
-                        new String[]{FasterBridge.instance.cfs("buttons.arenaReset.lore0"),
-                                FasterBridge.instance.cfs("buttons.arenaReset.lore1"),
-                                FasterBridge.instance.cfs("buttons.arenaReset.lore2"),
-                                FasterBridge.instance.cfs("buttons.arenaReset.lore3")}
+                        getLore("arenaReset")
                 );
             }
 
@@ -433,11 +455,7 @@ public class EditorUI extends UIAbstract {
                                 "&4ARENA REMOVE"
                         ),
                         true,
-                        new String[]{FasterBridge.instance.cfs("buttons.arenaDelete.lore0"),
-                                FasterBridge.instance.cfs("buttons.arenaDelete.lore1"),
-                                FasterBridge.instance.cfs("buttons.arenaDelete.lore2"),
-                                FasterBridge.instance.cfs("buttons.arenaDelete.lore3")
-                        }
+                        getLore("arenaDelete")
                 );
             }
 

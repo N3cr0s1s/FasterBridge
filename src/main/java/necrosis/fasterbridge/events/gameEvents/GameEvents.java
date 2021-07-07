@@ -39,7 +39,6 @@ public class GameEvents implements Listener {
         );
         if(event.getPlayer().getLocation().getY() < arena.getDeathZoneVertical()){
             this.plugin.getGameManager().getGamePlayerDeath().playerDeath(event.getPlayer());
-            //event.setCancelled(true);
         }
     }
 

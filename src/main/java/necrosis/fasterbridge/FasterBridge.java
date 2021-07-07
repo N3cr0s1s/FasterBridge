@@ -64,6 +64,9 @@ public final class FasterBridge extends PluginEntry {
     @Override
     public void onDisable() {
         for(PlayerClass p:this.playerManager.getPlayerClassMap().values()){
+            if(p.getEditor().isInEditor()){
+                this.arenaManager.player().getArenaPlayerLeaveEditor().leaveEditor(p);
+            }
             if(p.getGame().isInGame()){
                 try {
                     this.arenaManager.player().getArenaPlayerLeave().leaveArena(Bukkit.getPlayer(p.getPlayerUUID()));

@@ -37,6 +37,7 @@ public class GamePlayerWin {
     }
 
     private void newRecord(Player player,String time){
+        this.plugin.getUtilsManager().getScoreboardHandler().updateScoreboard();
         if(CraftKit.getInstance().getNms().getNmsVersion().contains("1.8") || CraftKit.getInstance().getNms().getNmsVersion().contains("1_8")){
             this.plugin.getUtilsManager().getSendTitleUtil().sendFullTitle(player,1,20,2,this.plugin.cfs("messages.newRecord.title","%time%",time),this.plugin.cfs("messages.newRecord.subTitle","%time%",time));
             return;

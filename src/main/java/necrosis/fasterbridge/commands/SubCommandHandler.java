@@ -2,6 +2,7 @@ package necrosis.fasterbridge.commands;
 
 import cornerlesscube.craftkit.command.CommandAccessibility;
 import cornerlesscube.craftkit.command.CommandBase;
+import cornerlesscube.craftkit.command.CommandMessages;
 import cornerlesscube.craftkit.command.RegisterCommand;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.commands.subcommand.*;

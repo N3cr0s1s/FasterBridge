@@ -30,7 +30,10 @@ public class UIManager {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',displayName));
         List<String> lores = new ArrayList<>();
-        for(String s:lore) lores.add(ChatColor.translateAlternateColorCodes('&',s));
+        for(String s:lore){
+            if(s == null || s.equals("")) continue;
+            lores.add(ChatColor.translateAlternateColorCodes('&',s));
+        }
         meta.setLore(lores);
         if(enchant){
             meta.addEnchant(Enchantment.LUCK,1,false);
