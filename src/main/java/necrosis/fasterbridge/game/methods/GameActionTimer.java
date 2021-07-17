@@ -16,9 +16,15 @@ public class GameActionTimer {
         this.plugin = plugin;
     }
 
+    //  Start player action timer
+    //  to see his timer
     public void startActionTimer(Player player){
         PlayerClass playerClass = this.plugin.getPlayerManager().getPlayerClass(player);
-        if(CraftKit.getInstance().getNms().getNmsVersion().contains("v1_8")){
+
+        //  If version under 9
+        //  Use NMS action bar
+        if(this.plugin.getVersionManager().getVersion() < 9){
+            //  Define repeatable bukkit task
             playerClass.getGame().setBukkitTask(
                     new BukkitRunnable() {
                         public void run() {
@@ -28,6 +34,9 @@ public class GameActionTimer {
                     }.runTaskTimer(this.plugin, 0, 5)
             );
         }else{
+            //  Above 1.8^
+
+            //  Define repeatable bukkit task
             playerClass.getGame().setBukkitTask(
                     new BukkitRunnable() {
                         public void run() {
@@ -39,6 +48,7 @@ public class GameActionTimer {
         }
     }
 
+    //  Stop action timer for player
     public void stopActionTimer(Player player){
         PlayerClass playerClass = this.plugin.getPlayerManager().getPlayerClass(player);
         playerClass.getGame().getBukkitTask().cancel();

@@ -6,6 +6,8 @@ import cornerlesscube.craftkit.command.CommandMessages;
 import cornerlesscube.craftkit.command.RegisterCommand;
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.commands.subcommand.*;
+import necrosis.fasterbridge.customevents.other.SubCommandEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -30,7 +32,9 @@ public class SubCommandHandler extends CommandBase{
                 new JoinEditorSubCommand(),
                 new GetFunctionBlockSubCommand(),
                 new JoinArenaSubCommand(),
-                new ArenaTestSubCommand()
+                new ArenaTestSubCommand(),
+                new SetHandBlockSubCommand(),
+                new BlockSelectSubCommand()
         );
     }
     private List<SubCommandInterface> subcommands = new ArrayList<>();
@@ -67,6 +71,14 @@ public class SubCommandHandler extends CommandBase{
                     return false;
                 }
                 cmd.execute(player,args);
+
+                //  Call SubCommandEvent
+                Bukkit.getServer().getPluginManager().callEvent(
+                        new SubCommandEvent(
+                                player,
+                                args[0]
+                        )
+                );
                 return true;
             }
         }

@@ -17,7 +17,7 @@ public class DeathZoneBlock extends FunctionBlockAbstract {
 
     @Override
     public Material itemMaterial() {
-        if(CraftKit.getInstance().getNms().getNmsVersion().contains("16")) return Material.getMaterial("NETHERITE_BLOCK");
+        if(FasterBridge.instance.getVersionManager().getVersion() >= 16) return Material.getMaterial("NETHERITE_BLOCK");
         return Material.getMaterial("BRICK");
     }
 

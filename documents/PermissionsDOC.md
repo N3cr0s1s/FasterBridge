@@ -9,6 +9,8 @@
 | givegadget  | fastbridge.givegadget   |
 | editor      | fastbridge.editor       |
 | setloc      | fastbridge.setloc       |
+| setblock    | fastbridge.setblock     |
+| blocks      | fastbridge.blocks       |
 
 ### Gadgets
 
@@ -17,3 +19,4 @@
 | arenaEditorGadget   | fastbridge.arenaEditorGadget    |
 | arenaLeaveGadget    | fastbridge.arenaLeaveGadget     |
 | arenaSelectorGadget | fastbridge.arenaSelectorGadget  |
+| arenaRestartGadget  | fastbridge.arenaRestartGadget   |

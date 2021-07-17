@@ -89,14 +89,14 @@ public class GameClass {
             FasterBridge.instance.getServer().getScheduler().scheduleSyncDelayedTask(FasterBridge.instance, () -> {
                 int itemMax = 10;
                 try {
-                    itemMax = FasterBridge.instance.getConfig().getInt("config.spawnitem-max");
+                    itemMax = FasterBridge.instance.getConfig().getInt("config.destroy-item.spawnitem-max");
                 }catch (Exception ignored){}
                 ArrayList<Item> items = new ArrayList<>();
                 int itemsCount = 0;
                 for (Block b : this.blocks) {
                     try {
                         if(itemsCount < itemMax) {
-                            items.add(b.getWorld().dropItem(b.getLocation(), new ItemStack(b.getType(), 64)));
+                            items.add(b.getWorld().dropItem(b.getLocation(), new ItemStack(b.getType(), FasterBridge.instance.getConfig().getInt("config.destroy-item.item-amount"))));
                             itemsCount++;
                         }
                     } catch (Exception ignored) { }
@@ -107,7 +107,7 @@ public class GameClass {
                     for (Item item : items) {
                         item.remove();
                     }
-                }, 20L);
+                }, FasterBridge.instance.getConfig().getLong("config.destroy-item.itemalive-tick"));
             }, 2L);
         }catch (IllegalPluginAccessException wtf){}
     }

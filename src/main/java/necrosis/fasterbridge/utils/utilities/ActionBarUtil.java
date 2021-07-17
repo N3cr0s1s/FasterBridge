@@ -18,7 +18,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActionBarUtil {
+public final class ActionBarUtil {
 
     private final Map<Player, BukkitTask> PENDING_MESSAGES = new HashMap<>();
 

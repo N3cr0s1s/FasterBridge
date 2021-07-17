@@ -1,44 +1,3 @@
-# FasterBridge
-This is a spigot plugin for fastbridging.
-It's under development.
-You can access it under the dev branch.
-
-## Quick tutorial:
-
-[![](https://yt-embed.herokuapp.com/embed?v=pmLcsv-lLGw)](https://youtu.be/pmLcsv-lLGw)
-
-##Documentations
-<details>
-<summary>Permissions</summary>
-<br>
-
-## Permissions
-### SubCommands
-
-| SubCommand  |     Permission	        |
-| ----------- | ----------------------- |
-| test	 	  | fastbridge.test         |
-| create      | fastbridge.create       |
-| func        | fastbridge.func         |
-| givegadget  | fastbridge.givegadget   |
-| editor      | fastbridge.editor       |
-| setloc      | fastbridge.setloc       |
-| setblock    | fastbridge.setblock     |
-| blocks      | fastbridge.blocks       |
-
-### Gadgets
-
-|       Gadget        |         Permission	            |
-| ------------------- | ------------------------------- |
-| arenaEditorGadget   | fastbridge.arenaEditorGadget    |
-| arenaLeaveGadget    | fastbridge.arenaLeaveGadget     |
-| arenaSelectorGadget | fastbridge.arenaSelectorGadget  |
-| arenaRestartGadget  | fastbridge.arenaRestartGadget   |
-</details>
-<details>
-<summary>Events</summary>
-<br>
-
 #Custom events
 
 ##Arena
@@ -202,4 +161,3 @@ public void onButtonClick(ButtonClickEvent event){
     event.getButton();      //  ButtonInterface    
         }
 ```
-</details>

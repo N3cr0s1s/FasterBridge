@@ -3,8 +3,8 @@ version: 1.0-SNAPSHOT
 main: necrosis.fasterbridge.FasterBridge
 api-version: 1.16
 prefix: FastBridge
-depend: [ CraftKit ]
-softdepend: [ CraftKit ]
+depend: [ CraftKit , Multiverse-Core ]
+softdepend: [ CraftKit , Multiverse-Core ]
 authors: [ Necrosis ]
 description: FastBridge plugin.
 load: POSTWORLD

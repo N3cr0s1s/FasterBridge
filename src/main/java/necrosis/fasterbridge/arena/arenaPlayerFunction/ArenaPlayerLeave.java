@@ -2,8 +2,10 @@ package necrosis.fasterbridge.arena.arenaPlayerFunction;
 
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.arena.ArenaClass;
+import necrosis.fasterbridge.customevents.player.PlayerLeaveArenaEvent;
 import necrosis.fasterbridge.exceptions.*;
 import necrosis.fasterbridge.player.PlayerClass;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class ArenaPlayerLeave {
@@ -42,6 +44,16 @@ public class ArenaPlayerLeave {
 
         this.plugin.getGameManager().getActionTimer().stopActionTimer(player);
         playerClass.getGame().deleteBlock();
+
+        //  CALL PlayerLeaveArenaEvent
+        Bukkit.getServer().getPluginManager().callEvent(
+                new PlayerLeaveArenaEvent(
+                        player,
+                        arena.getArenaName(),
+                        playerClass,
+                        arena
+                )
+        );
 
         return arena;
     }

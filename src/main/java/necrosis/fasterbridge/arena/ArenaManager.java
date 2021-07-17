@@ -23,29 +23,37 @@ public final class ArenaManager {
         this.playerClass = new ArenaPlayerClass(plugin);
     }
 
+    //  Get arenas hash map
     public HashMap<String,ArenaClass> getArenaMap(){
         return arenaMap;
     }
 
+    //  Register arena
+    //  Add to arenas hash map
     public ArenaClass registerArena(String arenaName,ArenaClass arenaClass){
         this.arenaMap.put(arenaName,arenaClass);
         return arenaClass;
     }
 
+    //  Unregister arena
+    //  Remove arena from hash map
     public void unloadArena(String arenaName) throws ArenaNotFoundException {
         if(!isArenaExist(arenaName))throw new ArenaNotFoundException("Arena does not exist!");
         this.arenaMap.remove(arenaName);
     }
 
+    //  Get arena by name
     public ArenaClass getArena(String arenaName) throws ArenaNotFoundException {
         if(!this.arenaMap.containsKey(arenaName)) throw new ArenaNotFoundException("Arena does not exist.");
         return this.arenaMap.get(arenaName);
     }
 
+    //  Get editor classes/methods
     public ArenaEditorClass editor() {
         return editorClass;
     }
 
+    //  Get player classes/methods
     public ArenaPlayerClass player() {
         return playerClass;
     }
