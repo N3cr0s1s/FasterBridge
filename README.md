@@ -3,6 +3,21 @@ This is a spigot plugin for fastbridging.
 It's under development.
 You can access it under the dev branch.
 
+## Versions
+|Version|Working|
+| ----------- | ----------------------- |
+| 1.8 | ✓ |
+| 1.9 | ? |
+| 1.10 | ? |
+| 1.11 | ? |
+| 1.12 | ? |
+| 1.13 | ? |
+| 1.14 | ? |
+| 1.15 | ? |
+| 1.16 | ✓ |
+| 1.17 | ? |
+
+
 ## Quick tutorial:
 
 [![](https://yt-embed.herokuapp.com/embed?v=pmLcsv-lLGw)](https://youtu.be/pmLcsv-lLGw)
