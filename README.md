@@ -3,6 +3,10 @@ This is a spigot plugin for fastbridging.
 It's under development.
 You can access it under the dev branch.
 
+<details>
+<summary>Versions</summary>
+<br>
+    
 ## Versions
 |Version|Working|
 | ----------- | ----------------------- |
@@ -16,6 +20,7 @@ You can access it under the dev branch.
 | 1.15 | ? |
 | 1.16 | ✓ |
 | 1.17 | ? |
+</details>
 
 
 ## Quick tutorial:
