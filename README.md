@@ -39,9 +39,9 @@ You can access it under the dev branch.
 <summary>Events</summary>
 <br>
 
-#Custom events
+# Custom events
 
-##Arena
+## Arena
 PlayerJoinArenaEvent
 ```java
 @EventHandler
@@ -86,7 +86,7 @@ public void onArenaDelete(ArenaDeleteEvent event){
         }
 ```
 
-##Editor
+## Editor
 PlayerJoinEditorEvent
 ```java
 @EventHandler
@@ -109,7 +109,7 @@ public void onPlayerLeaveEditor(PlayerLeaveEditorEvent event){
         }
 ```
 
-##Game
+## Game
 
 PlayerArenaResetEvent
 ```java
@@ -157,7 +157,7 @@ public void onPlayerWin(PlayerWinEvent event){
         }
 ```
 
-##Player
+## Player
 
 ChangeBlockEvent
 ```java
@@ -170,7 +170,7 @@ public void onPlayerBlockChange(ChangeBlockEvent event){
         }
 ```
 
-##Other
+## Other
 
 SubCommandEvent
 ```java
