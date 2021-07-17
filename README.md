@@ -7,7 +7,7 @@ You can access it under the dev branch.
 
 [![](https://yt-embed.herokuapp.com/embed?v=pmLcsv-lLGw)](https://youtu.be/pmLcsv-lLGw)
 
-##Documentations
+## Documentations
 <details>
 <summary>Permissions</summary>
 <br>
