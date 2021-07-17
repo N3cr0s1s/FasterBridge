@@ -2,6 +2,7 @@ package necrosis.fasterbridge.player;
 
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.arena.ArenaClass;
+import necrosis.fasterbridge.customevents.player.ChangeBlockEvent;
 import necrosis.fasterbridge.exceptions.ArenaNotFoundException;
 import necrosis.fasterbridge.player.classes.EditorClass;
 import necrosis.fasterbridge.player.classes.GameClass;
@@ -50,12 +51,32 @@ public class PlayerClass {
         Player player = Bukkit.getPlayer(getPlayerUUID());
         this.plugin.getConfigManager().getBlocksConfig().setBlock(player,block.getType(),block.getItemMeta().getDisplayName());
         this.block = new ItemStack(block.getType(),64);
+
+        //  Call ChangeBlockEvent
+        Bukkit.getServer().getPluginManager().callEvent(
+                new ChangeBlockEvent(
+                        player,
+                        this.plugin.getPlayerManager().getPlayerClass(player),
+                        block.getType(),
+                        block.getItemMeta().getDisplayName()
+                )
+        );
     }
 
-    public void setBlock(Material block) {
+    public void setBlock(Material block,String name) {
         Player player = Bukkit.getPlayer(getPlayerUUID());
         this.plugin.getConfigManager().getBlocksConfig().setBlock(player,block,block.name());
         this.block = new ItemStack(block,64);
+
+        //  Call ChangeBlockEvent
+        Bukkit.getServer().getPluginManager().callEvent(
+                new ChangeBlockEvent(
+                        player,
+                        this.plugin.getPlayerManager().getPlayerClass(player),
+                        block,
+                        name
+                )
+        );
     }
 
     public String getPlayerName() {

@@ -2,6 +2,7 @@ package necrosis.fasterbridge.ui;
 
 import cornerlesscube.craftkit.ExcludeFromAutoRegister;
 import necrosis.fasterbridge.FasterBridge;
+import necrosis.fasterbridge.customevents.other.ButtonClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -52,6 +53,17 @@ public abstract class UIAbstract {
             for(ButtonInterface b:this.uiAbstract.buttons((Player) e.getWhoClicked())){
                 if(e.getCurrentItem().equals(b.item((Player) e.getWhoClicked()))){
                     b.click((Player) e.getWhoClicked(),e.getSlot(),e.getCurrentItem(),e.getInventory());
+
+                    //  Call ButtonClickEvent
+                    Bukkit.getServer().getPluginManager().callEvent(
+                            new ButtonClickEvent(
+                                    ((Player) e.getWhoClicked()).getPlayer(),
+                                    e.getSlot(),
+                                    e.getCurrentItem(),
+                                    e.getInventory(),
+                                    b
+                            )
+                    );
                     e.setCancelled(true);
                 }
             }

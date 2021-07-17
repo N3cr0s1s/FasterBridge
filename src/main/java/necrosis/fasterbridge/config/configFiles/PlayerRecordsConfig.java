@@ -41,13 +41,21 @@ public final class PlayerRecordsConfig {
     public double getRecord(Player player) throws NotInArenaException {
         if(!this.plugin.getPlayerManager().getPlayerClass(player).getGame().isInGame()) throw new NotInArenaException("Player not in arena");
         PlayerClass playerClass = this.plugin.getPlayerManager().getPlayerClass(player);
-        return Double.valueOf(String.valueOf(this.playerRecords.read(player.getUniqueId() + "." + playerClass.getGame().getInArena())));
+        try {
+            return Double.parseDouble(String.valueOf(this.playerRecords.read(player.getUniqueId() + "." + playerClass.getGame().getInArena())));
+        }catch (NumberFormatException e){
+            return 0;
+        }
     }
 
     public double getRecord(Player player,String arenaName) throws ArenaNotFoundException {
         PlayerClass playerClass = this.plugin.getPlayerManager().getPlayerClass(player);
         ArenaClass arena = this.plugin.getArenaManager().getArena(arenaName);
-        return Double.valueOf(String.valueOf(this.playerRecords.read(player.getUniqueId() + "." + arenaName)));
+        try {
+            return Double.parseDouble(String.valueOf(this.playerRecords.read(player.getUniqueId() + "." + arenaName)));
+        }catch (NumberFormatException e){
+            return 0;
+        }
     }
 
     public boolean isPlayerSet(Player player,String arenaName){

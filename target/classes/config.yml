@@ -34,10 +34,17 @@ messages:
   newRecord:
     title: "&a&lNew record!"
     subTitle: "&5[ &7&l%time% &r&5]"
+  setBlock:
+    desc: "Set player block to player in hand block."
+    air: "&cItem in hand can't be air!"
+    ##  placeholders: { %material% , %displayName% }
+    succ: "&aItem successfully set. &5[ &7&l%material% &r&5]"
+  blocks:
+    desc: "Open blocks selector ui."
 
 gadgets:
   arenaSelectorGadget:
-    name:   "&7.../-&aArena&bSelect&7-\\..."
+    name: "&7.../-&aArena&bSelect&7-\\..."
     lore0:  "____|--|____"
     lore1:  "&a  Right click"
     lore2:  "&a to use this"
@@ -51,6 +58,20 @@ gadgets:
     lore3:  "----|__|----"
   arenaEditorGadget:
     name: "&7../-&5Arena&dEditor&7-\\.."
+    lore0: "....____|--|____...."
+    lore1: "&a    Right click"
+    lore2: "&a   to use this"
+    lore3: "....----|__|----...."
+  arenaRestartGadget:
+    name: "&7../=&5Arena&cRestart&7-\\.."
+    lore0: "....____|--|____...."
+    lore1: "&a    Right click"
+    lore2: "&a   to use this"
+    lore3: "....----|__|----...."
+    no-game: "&cPlayer not in game!"
+  block-selector:
+    name: "&7../=&5Block&8Selector&7=\\.."
+    material: "STONE"
     lore0: "....____|--|____...."
     lore1: "&a    Right click"
     lore2: "&a   to use this"
@@ -79,39 +100,85 @@ buttons:
     isfull: "&cArena is full."
   deathZoneHorizontal:
     ##INCREASE DEATHZONE HORIZONTAL
-    incLore0: ""
-    incLore1: ""
-    incLore2: ""
-    incLore3: ""
+    inc:
+      lore:
+        - ""
+        - ""
+        - ""
+        - ""
     ##DECREASE DEATHZONE HORIZONTAL
-    decLore0: ""
-    decLore1: ""
-    decLore2: ""
-    decLore3: ""
+    dec:
+      lore:
+        - ""
+        - ""
+        - ""
+        - ""
   deathZoneVertical:
     ##INCREASE DEATHZONE VERTICAL
-    incLore0: ""
-    incLore1: ""
-    incLore2: ""
-    incLore3: ""
+    inc:
+      lore:
+        - ""
+        - ""
+        - ""
+        - ""
     ##DECREASE DEATHZONE VERICAL
-    decLore0: ""
-    decLore1: ""
-    decLore2: ""
-    decLore3: ""
+    dec:
+      lore:
+        - ""
+        - ""
+        - ""
+        - ""
   arenaReset:
     succ: "&aSlots successfully deleted."
-    lore0: ""
-    lore1: ""
-    lore2: ""
-    lore3: ""
+    lore:
+      - ""
+      - ""
+      - ""
+      - ""
   leaveEditor:
     valid: "&aArena is valid. Ready to use."
     notvalid: "&cArena is not valid. Please fix it."
   arenaDelete:
-    lore0: "&4!!!!!"
-    lore1: "&4&lBE CAREFUL!"
-    lore2: "&4&lBE CAREFUL!"
-    lore3: "&4!!!!!"
+    lore:
+      - ""
+      - ""
+      - ""
+      - ""
     succ: "&aArena deleted! &5[ &7&l%arenaName% &r&5]"
     fail: "&cArena does not exist!"
+
+scoreboard:
+  title: "&5[ &7&l%arenaName% &r&5]"
+  list:
+    - "&7Arena Name:"
+    - "&5[ &7&l%arenaName% &r&5]"
+    - "------------------"
+    - "&7Arena record:"
+    - "&5[ &6&l%record% &r&5]"
+
+ui:
+  block-selector:
+    title: "&5&lBlock&r&7Selector"
+    succ: "&aBlock successfully set. &5[ &7%blockName% &5]"
+  arena-selector:
+    ## placeholders{ %maxPlayers% , %freeSlot% , %arenaName% , %isActive% }
+    title: "&5[ &7&l%arenaName% &r&5]"
+    lore:
+      - "&7Max players"
+      - "&5[ &8%freeSlot% &7/ %maxPlayers% &5]"
+      - "&7Is Active"
+      - "&5[ &8%isActive% &5]"
+
+config:
+  destroy-item:
+    ## Braked block spawns item limit
+    spawnitem-max: 20
+    ## Item alive time in tick
+    itemalive-tick: 20
+    ## Spawned item amount
+    item-amount: 64
+  gadgets-slot:
+    player-block-slot: 0
+    exit-arena-slot: 5
+    restart-arena-slot: 6
+    block-selector-slot: 4

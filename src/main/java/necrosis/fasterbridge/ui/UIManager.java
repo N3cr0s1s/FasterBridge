@@ -2,6 +2,7 @@ package necrosis.fasterbridge.ui;
 
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.ui.uis.ArenaSelectorUI;
+import necrosis.fasterbridge.ui.uis.BlockSelectUI;
 import necrosis.fasterbridge.ui.uis.EditorUI;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -20,6 +21,7 @@ public class UIManager {
 
     private EditorUI editorUI;
     private ArenaSelectorUI arenaSelectorUI;
+    private BlockSelectUI blockSelectUI;
 
     public UIManager(FasterBridge plugin){
         this.plugin = plugin;
@@ -30,7 +32,10 @@ public class UIManager {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',displayName));
         List<String> lores = new ArrayList<>();
-        for(String s:lore) lores.add(ChatColor.translateAlternateColorCodes('&',s));
+        for(String s:lore){
+            if(s == null || s.equals("")) continue;
+            lores.add(ChatColor.translateAlternateColorCodes('&',s));
+        }
         meta.setLore(lores);
         if(enchant){
             meta.addEnchant(Enchantment.LUCK,1,false);
@@ -43,6 +48,7 @@ public class UIManager {
     public void registerUIs(){
         this.editorUI = new EditorUI(plugin,this);
         this.arenaSelectorUI = new ArenaSelectorUI(this.plugin);
+        this.blockSelectUI = new BlockSelectUI(this.plugin);
     }
 
     public void openEditor(Player player){
@@ -53,4 +59,5 @@ public class UIManager {
         player.openInventory(this.arenaSelectorUI.GUI(player));
     }
 
+    public void openBlocks(Player player) { player.openInventory(this.blockSelectUI.GUI(player)); }
 }

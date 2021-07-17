@@ -44,7 +44,7 @@ public final class BlocksConfig {
     public void setBlock(Player player, Material block,String displayName){
         PlayerClass playerClass = plugin.getPlayerManager().getPlayerClass(player);
         this.blockConfig.write(playerClass.getPlayerUUID() + ".material",block.name());
-        this.blockConfig.write(playerClass.getPlayerUUID() + ".displayName",'"'+ ChatColor.translateAlternateColorCodes('&',displayName) + '"');
+        this.blockConfig.write(playerClass.getPlayerUUID() + ".displayName",ChatColor.translateAlternateColorCodes('&',displayName));
     }
 
     public ItemStack getBlock(Player player){

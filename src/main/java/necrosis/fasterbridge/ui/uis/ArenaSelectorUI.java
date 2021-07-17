@@ -51,14 +51,9 @@ public class ArenaSelectorUI extends UIAbstract {
                 public ItemStack item(Player player) {
                     return FasterBridge.instance.getUiManager().createItem(
                             Material.PAPER,
-                            "&5[ &8&l" + super.arenaHolder.getArenaName() + " &r&5]",
+                            getPlaceholderTitle(FasterBridge.instance.cfs("ui.arena-selector.title"), super.arenaHolder),
                             arena.isActive(),
-                            new String[]{
-                                    "&8Max players: ",
-                                    "&5[&7" + super.arenaHolder.getMaxPlayer() + " : &8&l" + super.arenaHolder.getFreeSlots() + "&r&5]",
-                                    "&8Is active: ",
-                                    "&5[&7 " + super.arenaHolder.isActive() + " &5]"
-                            }
+                            getPlaceholderLore(super.arenaHolder)
                     );
                 }
 
@@ -82,6 +77,34 @@ public class ArenaSelectorUI extends UIAbstract {
             i++;
         }
         return list;
+    }
+
+    private String[] getPlaceholderLore(ArenaClass arena){
+        List<String> list = new ArrayList<>();
+        for(String message:FasterBridge.instance.getConfig().getStringList("ui.arena-selector.lore")){
+            if(message.equals("") || message == null) continue;
+            while(message.contains("%freeSlot%") || message.contains("%maxPlayers%") || message.contains("%isActive%") || message.contains("%arenaName%")){
+                message = message.replace("%freeSlot%",arena.getFreeSlots() + "")
+                        .replace("%maxPlayers%",arena.getMaxPlayer()+"")
+                        .replace("%isActive%",arena.isActive()+"")
+                        .replace("%arenaName%",arena.getArenaName());
+            }
+            list.add(message);
+        }
+        for(int i = 0; i < 4; i++){
+            if(list.get(i) == null) list.set(i,"");
+        }
+        return new String[]{list.get(0),list.get(1),list.get(2),list.get(3)};
+    }
+
+    public String getPlaceholderTitle(String message,ArenaClass arena){
+        while(message.contains("%freeSlot%") || message.contains("%maxPlayers%") || message.contains("%isActive%") || message.contains("%arenaName%")){
+            message = message.replace("%freeSlot%",arena.getFreeSlots() + "")
+                    .replace("%maxPlayers%",arena.getMaxPlayer()+"")
+                    .replace("%isActive%",arena.isActive()+"")
+                    .replace("%arenaName%",arena.getArenaName());
+        }
+        return message;
     }
 
     @Override

@@ -3,9 +3,7 @@ package necrosis.fasterbridge.gadget;
 
 import necrosis.fasterbridge.FasterBridge;
 import necrosis.fasterbridge.exceptions.GadgetNotExistException;
-import necrosis.fasterbridge.gadget.gadgets.ArenaEditorGadget;
-import necrosis.fasterbridge.gadget.gadgets.ArenaLeaveGadget;
-import necrosis.fasterbridge.gadget.gadgets.ArenaSelectorGadget;
+import necrosis.fasterbridge.gadget.gadgets.*;
 
 import java.util.HashMap;
 
@@ -23,7 +21,9 @@ public class GadgetManager {
         this.registerGadget(
                 new ArenaEditorGadget(),
                 new ArenaLeaveGadget(),
-                new ArenaSelectorGadget()
+                new ArenaSelectorGadget(),
+                new ArenaRestartGadget(),
+                new BlockSelectGadget()
         );
         this.plugin.logger().getInfo("&aObjects registered. &5[&7 Gadgets &5]");
     }

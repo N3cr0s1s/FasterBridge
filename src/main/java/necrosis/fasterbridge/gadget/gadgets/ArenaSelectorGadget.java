@@ -38,6 +38,10 @@ public class ArenaSelectorGadget extends GadgetAbstract {
 
     @Override
     public void itemFunction(Player player) {
+        if(FasterBridge.instance.getPlayerManager().getPlayerClass(player).getGame().isInGame()){
+            player.sendMessage(FasterBridge.instance.cfs("messages.JoinArena.already","%arenaName%",FasterBridge.instance.getPlayerManager().getPlayerClass(player).getGame().getInArena()));
+            return;
+        }
         FasterBridge.instance.getUiManager().openArenaSelector(player);
     }
 }

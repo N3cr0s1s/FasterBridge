@@ -6,7 +6,6 @@ package necrosis.fasterbridge.utils.utilities;
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-import com.sun.istack.internal.NotNull;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
@@ -19,7 +18,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActionBarUtil {
+public final class ActionBarUtil {
 
     private final Map<Player, BukkitTask> PENDING_MESSAGES = new HashMap<>();
 
@@ -31,7 +30,7 @@ public class ActionBarUtil {
      * @param bukkitPlayer the player to send the message to.
      * @param message the message to send.
      */
-    public void sendActionBarMessage(@NotNull Player bukkitPlayer, @NotNull String message) {
+    public void sendActionBarMessage(Player bukkitPlayer, String message) {
         sendRawActionBarMessage(bukkitPlayer, "{\"text\": \"" + message + "\"}");
     }
 
@@ -44,7 +43,7 @@ public class ActionBarUtil {
      * @param bukkitPlayer the player to send the message to.
      * @param rawMessage the json format message to send.
      */
-    public void sendRawActionBarMessage(@NotNull Player bukkitPlayer, @NotNull String rawMessage) {
+    public void sendRawActionBarMessage(Player bukkitPlayer,String rawMessage) {
         CraftPlayer player = (CraftPlayer) bukkitPlayer;
         IChatBaseComponent chatBaseComponent = ChatSerializer.a(rawMessage);
         PacketPlayOutChat packetPlayOutChat = new PacketPlayOutChat(chatBaseComponent, (byte) 2);
@@ -65,8 +64,8 @@ public class ActionBarUtil {
      * @param duration the duration the message should be visible for in seconds.
      * @param plugin the plugin sending the message.
      */
-    public void sendActionBarMessage(@NotNull final Player bukkitPlayer, @NotNull final String message,
-                                            @NotNull final int duration, @NotNull Plugin plugin) {
+    public void sendActionBarMessage( final Player bukkitPlayer,final String message,
+                                             final int duration,  Plugin plugin) {
         cancelPendingMessages(bukkitPlayer);
         final BukkitTask messageTask = new BukkitRunnable() {
             private int count = 0;
@@ -82,7 +81,7 @@ public class ActionBarUtil {
         PENDING_MESSAGES.put(bukkitPlayer, messageTask);
     }
 
-    private void cancelPendingMessages(@NotNull Player bukkitPlayer) {
+    private void cancelPendingMessages( Player bukkitPlayer) {
         if (PENDING_MESSAGES.containsKey(bukkitPlayer)) {
             PENDING_MESSAGES.get(bukkitPlayer).cancel();
         }
